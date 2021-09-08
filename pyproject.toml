@@ -1,0 +1,35 @@
+[tool.poetry]
+name = "egresocovid19"
+version = "0.0.1"
+description = "Egreso COVID-19 server implementation with FastAPI"
+authors = ["Leynier Gutiérrez González <leynier41@gmail.com>"]
+homepage = "https://github.com/codestrange/egresocovid19-server"
+repository = "https://github.com/codestrange/egresocovid19-server"
+documentation = "https://github.com/codestrange/egresocovid19-server"
+readme = "README.md"
+
+[tool.poetry.scripts]
+egresocovid19 = "egresocovid19.cli:app"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+typer = "^0.4.0"
+fastapi = {extras = ["all"], version = "^0.68.1"}
+python-dotenv = "^0.19.0"
+fastapi-restful = {extras = ["all"], version = "^0.3.2"}
+python-jose = {extras = ["cryptography"], version = "^3.3.0"}
+passlib = {extras = ["bcrypt"], version = "^1.7.4"}
+python-multipart = "^0.0.5"
+beanie = "^1.2.8"
+
+[tool.poetry.dev-dependencies]
+pytest = "^6.2.5"
+flake8 = "^3.9.2"
+black = "^21.8b0"
+isort = "^5.9.3"
+pytest-cov = "^2.12.1"
+pytest-asyncio = "^0.15.1"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

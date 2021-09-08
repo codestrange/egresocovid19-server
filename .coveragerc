@@ -1,0 +1,4 @@
+[run]
+omit =
+    egresocovid19/__main__.py
+    tests/*
