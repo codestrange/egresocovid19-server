@@ -1,6 +1,4 @@
-from typing import Optional
-
-from fastapi import Depends, Form, HTTPException, status
+from fastapi import Depends, HTTPException, status
 from fastapi.security.oauth2 import OAuth2PasswordBearer
 from pydantic import BaseModel
 
@@ -8,27 +6,11 @@ from ...database import UserEntity
 from ...services.auth_service import AuthService
 
 
-class AccessTokenModel(BaseModel):
-    access_token: str
+class TokenModel(BaseModel):
     token_type: str = "bearer"
-
-
-class AccessRefreshTokenModel(AccessTokenModel):
+    access_token: str
     refresh_token: str
-
-
-class OAuth2RefreshTokenRequestForm:
-    def __init__(
-        self,
-        grant_type: str = Form(None, regex="refresh_token"),
-        refresh_token: str = Form(...),
-        client_id: Optional[str] = Form(None),
-        client_secret: Optional[str] = Form(None),
-    ):
-        self.grant_type = grant_type
-        self.refresh_token = refresh_token
-        self.client_id = client_id
-        self.client_secret = client_secret
+    expires_in: int
 
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="auth/token")
