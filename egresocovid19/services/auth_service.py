@@ -1,5 +1,6 @@
 from datetime import datetime, timedelta
 from typing import Optional, Union
+from uuid import uuid4
 
 from fastapi import Depends
 from jose import JWTError, jwt
@@ -68,6 +69,7 @@ class AuthService:
             to_encode["sub"] = str(user_or_id.id)
         else:
             to_encode["sub"] = str(user_or_id)
+        to_encode["rand"] = str(uuid4())
         expire = datetime.utcnow() + expires_delta
         to_encode.update({"exp": expire})
         encoded_jwt = jwt.encode(to_encode, secret_key, algorithm=algorithm)
