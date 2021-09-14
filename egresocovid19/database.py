@@ -62,6 +62,7 @@ class MunicipalityEmbeddedEntity(BaseModel):
 
 class PathologicalEntity(BaseEntity):
     name: str
+    default: bool = False
 
     class Collection:
         name: str = "pathologicals"
@@ -111,6 +112,7 @@ class ProvinceEntity(BaseEntity):
 
 class SymptomEntity(BaseEntity):
     name: str
+    default: bool = False
 
     class Collection:
         name: str = "symptoms"
