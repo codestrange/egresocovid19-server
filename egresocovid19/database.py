@@ -60,6 +60,11 @@ class MunicipalityEmbeddedEntity(BaseModel):
     name: str
 
 
+class PathologicalEmbeddedEntity(BaseModel):
+    pathological: PydanticObjectId
+    treatments: str
+
+
 class PathologicalEntity(BaseEntity):
     name: str
     default: bool = False
@@ -89,11 +94,9 @@ class PatientEntity(BaseEntity):
     neighborhood: str
     block_number: int
     # With autocompletation base on previous data and with default options
-    # List[Tuple[PathologicalEntity, str]]
-    personal_pathological_history: List[Tuple[PydanticObjectId, str]]
+    personal_pathological_history: List[PathologicalEmbeddedEntity]
     # With autocompletation base on previous data and with default options
-    # List[Tuple[PathologicalEntity, str]]
-    family_pathological_history: List[Tuple[PydanticObjectId, str]]
+    family_pathological_history: List[PathologicalEmbeddedEntity]
     discharge_of_positive_cases_of_covid_19: Optional[
         DischargeOfPositiveCasesOfCovid19EmbeddedEntity
     ]
