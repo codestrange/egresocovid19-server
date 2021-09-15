@@ -6,7 +6,7 @@ bcrypt==3.2.0; python_version >= "3.6"
 beanie==1.4.0; python_full_version >= "3.6.1" and python_version < "4.0"
 certifi==2021.5.30; python_version >= "3.6" and python_full_version < "3.0.0" or python_version >= "3.6" and python_full_version >= "3.6.0"
 cffi==1.14.6
-charset-normalizer==2.0.4; python_version >= "3.6" and python_full_version >= "3.6.0"
+charset-normalizer==2.0.5; python_version >= "3.6" and python_full_version >= "3.6.0"
 click==7.1.2; python_full_version >= "3.6.1" and python_version >= "3.6" and python_version < "4.0" and (python_version >= "3.6" and python_full_version < "3.0.0" or python_version >= "3.6" and python_full_version >= "3.5.0")
 colorama==0.4.4
 cryptography==3.4.8; python_version >= "3.6"
