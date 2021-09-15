@@ -1,4 +1,7 @@
-from beanie.operators import In
+from functools import reduce
+from typing import List
+
+from beanie.operators import In, Or, RegEx
 from fastapi import Depends
 from fastapi_restful.cbv import cbv
 from fastapi_restful.inferring_router import InferringRouter
@@ -15,7 +18,11 @@ from ....exceptions.not_found import NotFound
 from ....utils.bad_request_response import bad_request_response
 from ....utils.not_found_response import not_found_response
 from ..auth import get_current_active_user
-from ..schemas.patient_schemas import PatientGetSchema, PatientPostSchema
+from ..schemas.patient_schemas import (
+    PathologicalSchema,
+    PatientGetSchema,
+    PatientPostSchema,
+)
 
 router = InferringRouter(tags=["Patients"])
 
@@ -53,15 +60,17 @@ class PatientsController:
         )
         if not province or not municipality:
             raise NotFound("Municipality")
-        ps_input = [
-            p.name
-            for p in schema.personal_pathological_history
-            + schema.family_pathological_history
-        ]
+        ps_input = list(
+            {
+                p.name.lower()
+                for p in schema.personal_pathological_history
+                + schema.family_pathological_history
+            }
+        )
         ps_in_db = await PathologicalEntity.find(
-            In(PathologicalEntity.name, ps_input)
+            In(PathologicalEntity.name.lower(), ps_input)
         ).to_list()
-        ps_dict = {p.name: p for p in ps_in_db}
+        ps_dict = {p.name.lower(): p for p in ps_in_db}
         new_ps = [PathologicalEntity(name=p) for p in ps_input if p not in ps_dict]
         if new_ps:
             result = await PathologicalEntity.insert_many(new_ps)
@@ -94,3 +103,67 @@ class PatientsController:
             province=province.name,
             id=patient.id,
         )
+
+    @router.get("/patients/search/{query}")
+    async def get_patients(self, query: str) -> List[PatientGetSchema]:
+        provinces = await ProvinceEntity.find_all().to_list()
+        municipalities = {
+            municipality.id: (municipality.name, province.name)
+            for province in provinces
+            for municipality in province.municipalities
+        }
+        words = query.strip().lower().split(" ")
+        ors = reduce(
+            lambda acc, item: Or(acc, item),
+            map(
+                lambda x: Or(
+                    Or(
+                        RegEx(PatientEntity.firstname, x, options="i"),
+                        RegEx(PatientEntity.lastname, x, options="i"),
+                    ),
+                    RegEx(PatientEntity.ci, x, options="i"),
+                ),
+                words,
+            ),
+        )
+        result = await PatientEntity.find(ors).to_list()
+        pathologicals_id = list(
+            {
+                model.pathological
+                for item in result
+                for model in item.personal_pathological_history
+                + item.family_pathological_history
+            }
+        )
+        pathologicals = await PathologicalEntity.find(
+            In(PathologicalEntity.id, pathologicals_id)
+        ).to_list()
+        pathologicals_dict = {item.id: item.name for item in pathologicals}
+        return [
+            PatientGetSchema(
+                **item.dict(
+                    exclude={
+                        "municipality",
+                        "personal_pathological_history",
+                        "family_pathological_history",
+                    }
+                ),
+                municipality=municipalities[item.municipality][0],
+                province=municipalities[item.municipality][1],
+                personal_pathological_history=[
+                    PathologicalSchema(
+                        name=pathologicals_dict[p.pathological],
+                        treatments=p.treatments,
+                    )
+                    for p in item.personal_pathological_history
+                ],
+                family_pathological_history=[
+                    PathologicalSchema(
+                        name=pathologicals_dict[p.pathological],
+                        treatments=p.treatments,
+                    )
+                    for p in item.family_pathological_history
+                ],
+            )
+            for item in result
+        ]
