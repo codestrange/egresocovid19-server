@@ -19,7 +19,7 @@ from ....exceptions.not_found import NotFound
 from ....utils.bad_request_response import bad_request_response
 from ....utils.not_found_response import not_found_response
 from ..auth import get_current_active_user
-from ..schemas.patient_schemas import (
+from ..schemas import (
     PathologicalSchema,
     PatientGetSchema,
     PatientPostSchema,
