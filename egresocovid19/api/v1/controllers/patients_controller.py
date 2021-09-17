@@ -1,6 +1,7 @@
 from functools import reduce
 from typing import List
 
+from beanie import PydanticObjectId
 from beanie.operators import In, Or, RegEx
 from fastapi import Depends
 from fastapi_restful.cbv import cbv
@@ -167,3 +168,45 @@ class PatientsController:
             )
             for item in result
         ]
+
+    @router.get(
+        "/patients/{patientId}",
+        responses={
+            404: not_found_response,
+        },
+    )
+    async def get_patient(self, patientId: PydanticObjectId):
+        patient = await PatientEntity.get_or_404(patientId)
+        provinces = await ProvinceEntity.find_all().to_list()
+        municipalities = {
+            municipality.id: (municipality.name, province.name)
+            for province in provinces
+            for municipality in province.municipalities
+        }
+        pathologicals = await PathologicalEntity.find_all().to_list()
+        pathologicals_dict = {item.id: item.name for item in pathologicals}
+        return PatientGetSchema(
+            **patient.dict(
+                exclude={
+                    "municipality",
+                    "personal_pathological_history",
+                    "family_pathological_history",
+                }
+            ),
+            municipality=municipalities[patient.municipality][0],
+            province=municipalities[patient.municipality][1],
+            personal_pathological_history=[
+                PathologicalSchema(
+                    name=pathologicals_dict[p.pathological],
+                    treatments=p.treatments,
+                )
+                for p in patient.personal_pathological_history
+            ],
+            family_pathological_history=[
+                PathologicalSchema(
+                    name=pathologicals_dict[p.pathological],
+                    treatments=p.treatments,
+                )
+                for p in patient.family_pathological_history
+            ],
+        )
