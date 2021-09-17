@@ -1,3 +1,4 @@
+from datetime import datetime
 from typing import List, Optional
 
 from beanie import PydanticObjectId
@@ -23,6 +24,7 @@ client = AsyncIOMotorClient(get_settings().database_url)
 
 
 class DischargeOfPositiveCasesOfCovid19EmbeddedEntity(BaseModel):
+    detection_date: Optional[datetime]
     # With autocompletation base on previous data and with default options
     # SymptomEntity
     symptoms: List[PydanticObjectId]
