@@ -27,16 +27,35 @@ class PatientBaseSchema(APIModel):
     block_number: int
     personal_pathological_history: List[PathologicalSchema]
     family_pathological_history: List[PathologicalSchema]
-    # discharge_of_positive_cases_of_covid_19: Optional[
-    #     DischargeOfPositiveCasesOfCovid19EmbeddedEntity
-    # ]
 
 
 class PatientGetSchema(PatientBaseSchema):
     id: PydanticObjectId
     province: str
     municipality: str
+    discharge_of_positive_cases_of_covid_19: Optional[
+        DischargeOfPositiveCasesOfCovid19Schema
+    ]
 
 
 class PatientPostSchema(PatientBaseSchema):
     municipality: PydanticObjectId
+
+
+class PatientPutSchema(APIModel):
+    firstname: Optional[str]
+    lastname: Optional[str]
+    ci: Optional[str]
+    age: Optional[int]
+    sex: Optional[SexEnum]
+    skin_color: Optional[SkinColorEnum]
+    blood_type: Optional[Optional[BloodTypeEnum]]
+    address: Optional[str]
+    polyclinic: Optional[str]
+    surgery: Optional[str]
+    popular_council: Optional[str]
+    neighborhood: Optional[str]
+    block_number: Optional[int]
+    personal_pathological_history: Optional[List[PathologicalSchema]]
+    family_pathological_history: Optional[List[PathologicalSchema]]
+    municipality: Optional[PydanticObjectId]
