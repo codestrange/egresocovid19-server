@@ -1,99 +1,99 @@
-from enum import Enum
+from enum import IntEnum, auto
 
 
-class AftermathEnum(str, Enum):
-    Fatigue = "Fatigue"
-    Headache = "Headache"
-    Alopecia = "Alopecia"
-    RespiratorySymptoms = "RespiratorySymptoms"
-    MuscleBoneNeuropathicPain = "MuscleBoneNeuropathicPain"
-    PsychologicalPsychiatricDisorders = "PsychologicalPsychiatricDisorders"
-    SexualDisorders = "SexualDisorders"
-    SleepDisorder = "SleepDisorder"
-    PersistenceOfLossOfSmell = "PersistenceOfLossOfSmell"
-    PersistenceOfLossOfAppetite = "PersistenceOfLossOfAppetite"
-    GastrointestinalSymptoms = "GastrointestinalSymptoms"
-    Dizziness = "Dizziness"
-    DesiresToVomit = "DesiresToVomit"
-    Others = "Others"
+class AftermathEnum(IntEnum):
+    Fatigue = 0
+    Headache = auto()
+    Alopecia = auto()
+    RespiratorySymptoms = auto()
+    MuscleBoneNeuropathicPain = auto()
+    PsychologicalPsychiatricDisorders = auto()
+    SexualDisorders = auto()
+    SleepDisorder = auto()
+    PersistenceOfLossOfSmell = auto()
+    PersistenceOfLossOfAppetite = auto()
+    GastrointestinalSymptoms = auto()
+    Dizziness = auto()
+    DesiresToVomit = auto()
+    Others = auto()
 
 
-class BloodTypeEnum(str, Enum):
-    Aplus = "Aplus"
-    Bplus = "Bplus"
-    ABplus = "ABplus"
-    Oplus = "Oplus"
-    Aminus = "Aminus"
-    Bminus = "Bminus"
-    ABminus = "ABminus"
-    Ominus = "Ominus"
+class BloodTypeEnum(IntEnum):
+    Aplus = 0
+    Bplus = auto()
+    ABplus = auto()
+    Oplus = auto()
+    Aminus = auto()
+    Bminus = auto()
+    ABminus = auto()
+    Ominus = auto()
 
 
-class ContagionEnum(str, Enum):
-    Traveler = "Traveler"
-    Contact = "Contact"
-    Indeterminate = "Indeterminate"
+class ContagionEnum(IntEnum):
+    Traveler = 0
+    Contact = auto()
+    Indeterminate = auto()
 
 
-class DiagnosisWayEnum(str, Enum):
-    GuardCorps = "GuardCorps"
-    FocusControl = "FocusControl"
+class DiagnosisWayEnum(IntEnum):
+    GuardCorps = 0
+    FocusControl = auto()
 
 
-class IncomeEnum(str, Enum):
-    Home = "Home"
-    IsolationCenter = "IsolationCenter"
-    HospitalRoom = "HospitalRoom"
-    IntermediateTherapy = "IntermediateTherapy"
-    IntensiveTherapy = "IntensiveTherapy"
+class IncomeEnum(IntEnum):
+    Home = 0
+    IsolationCenter = auto()
+    HospitalRoom = auto()
+    IntermediateTherapy = auto()
+    IntensiveTherapy = auto()
 
 
-class ProphylaxisEnum(str, Enum):
-    Prevengovir = "Prevengovir"
-    Vimang = "Vimang"
-    Moringa = "Moringa"
-    BiomodulinT = "BiomodulinT"
-    VitaminC = "VitaminC"
-    Polivit = "Polivit"
-    Turmeric = "Turmeric"
-    Soverana2AndPlus = "Soverana2AndPlus"
-    Honey = "Honey"
-    VitaminA = "VitaminA"
-    Ginger = "Ginger"
-    SoveranaPlus = "SoveranaPlus"
-    Abdala = "Abdala"
-    Covid19Previously = "Covid19Previously"
-    AnotherVaccineAgainstCovid = "AnotherVaccineAgainstCovid"
+class ProphylaxisEnum(IntEnum):
+    Prevengovir = 0
+    Vimang = auto()
+    Moringa = auto()
+    BiomodulinT = auto()
+    VitaminC = auto()
+    Polivit = auto()
+    Turmeric = auto()
+    Soverana2AndPlus = auto()
+    Honey = auto()
+    VitaminA = auto()
+    Ginger = auto()
+    SoveranaPlus = auto()
+    Abdala = auto()
+    Covid19Previously = auto()
+    AnotherVaccineAgainstCovid = auto()
 
 
-class SexEnum(str, Enum):
-    Female = "Female"
-    Male = "Male"
-    Other = "Other"
+class SexEnum(IntEnum):
+    Female = 0
+    Male = auto()
+    Other = auto()
 
 
-class SkinColorEnum(str, Enum):
-    White = "White"
-    Black = "Black"
-    Other = "Other"
+class SkinColorEnum(IntEnum):
+    White = 0
+    Black = auto()
+    Other = auto()
 
 
-class TestDiagnosisEnum(str, Enum):
-    AntigenTest = "AntigenTest"
-    Biosensor = "Biosensor"
-    PCR = "PCR"
-    IgMIgGAntibodyTest = "IgMIgGAntibodyTest"
+class TestDiagnosisEnum(IntEnum):
+    AntigenTest = 0
+    Biosensor = auto()
+    PCR = auto()
+    IgMIgGAntibodyTest = auto()
 
 
-class TreatmentEnum(str, Enum):
-    Herferon = "Herferon"
-    InterferonGeneric = "InterferonGeneric"
-    Jusvinza = "Jusvinza"
-    Heberferon = "Heberferon"
-    FraxiparinLowMolecularWeightHeparins = "FraxiparinLowMolecularWeightHeparins"
-    Nasalferon = "Nasalferon"
-    Prednisone = "Prednisone"
-    Prevengovir = "Prevengovir"
-    Betamethasone = "Betamethasone"
-    Italizumab = "Italizumab"
-    Antibiotics = "Antibiotics"
+class TreatmentEnum(IntEnum):
+    Herferon = 0
+    InterferonGeneric = auto()
+    Jusvinza = auto()
+    Heberferon = auto()
+    FraxiparinLowMolecularWeightHeparins = auto()
+    Nasalferon = auto()
+    Prednisone = auto()
+    Prevengovir = auto()
+    Betamethasone = auto()
+    Italizumab = auto()
+    Antibiotics = auto()
