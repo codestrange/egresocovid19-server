@@ -1,4 +1,4 @@
-from typing import List, Optional, Tuple
+from typing import List, Optional
 
 from beanie import PydanticObjectId
 from motor.motor_asyncio import AsyncIOMotorClient
@@ -23,27 +23,26 @@ client = AsyncIOMotorClient(get_settings().database_url)
 
 
 class DischargeOfPositiveCasesOfCovid19EmbeddedEntity(BaseModel):
-    has_symptoms: bool
     # With autocompletation base on previous data and with default options
     # SymptomEntity
     symptoms: List[PydanticObjectId]
-    duration_of_symptoms: int
-    diagnosis_way: DiagnosisWayEnum
-    test_used_in_diagnosis: TestDiagnosisEnum
-    days_from_symptoms_to_diagnosis: int
-    number_pcr_performed: int
-    time_from_diagnosis_to_negative_or_discharge: int
-    form_of_contagion: ContagionEnum
-    was_he_part_of_an_event: bool
-    did_he_work_in_the_attention_to_positive_cases: bool
-    hospitalization_time: str
-    incomes: List[Tuple[IncomeEnum, int]]
-    contacts_first_level: int
-    contacts_first_level_positives: int
-    contacts_second_level: int
-    contacts_second_level_positives: int
-    contacts_third_level: int
-    contacts_third_level_positives: int
+    duration_of_symptoms: Optional[int]
+    diagnosis_way: Optional[DiagnosisWayEnum]
+    test_used_in_diagnosis: Optional[TestDiagnosisEnum]
+    days_from_symptoms_to_diagnosis: Optional[int]
+    number_pcr_performed: Optional[int]
+    time_from_diagnosis_to_negative_or_discharge: Optional[int]
+    form_of_contagion: Optional[ContagionEnum]
+    was_he_part_of_an_event: Optional[bool]
+    did_he_work_in_the_attention_to_positive_cases: Optional[bool]
+    hospitalization_time: Optional[str]
+    incomes: List["IncomeEmbeddedEntity"]
+    contacts_first_level: Optional[int]
+    contacts_first_level_positives: Optional[int]
+    contacts_second_level: Optional[int]
+    contacts_second_level_positives: Optional[int]
+    contacts_third_level: Optional[int]
+    contacts_third_level_positives: Optional[int]
     treatments_received: List[TreatmentEnum]
     # With autocompletation base on previous data
     antibiotics: List[str]
@@ -53,6 +52,11 @@ class DischargeOfPositiveCasesOfCovid19EmbeddedEntity(BaseModel):
     aftermath: List[AftermathEnum]
     # With autocompletation base on previous data
     others_aftermath: List[str]
+
+
+class IncomeEmbeddedEntity(BaseModel):
+    income: IncomeEnum
+    days: int
 
 
 class MunicipalityEmbeddedEntity(BaseModel):
