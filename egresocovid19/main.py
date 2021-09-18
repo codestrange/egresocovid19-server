@@ -1,7 +1,6 @@
 from typing import List
 
 from beanie import init_beanie
-from beanie.odm.queries.find import FindMany
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -31,19 +30,20 @@ async def startup():
         document_models=entities,  # type: ignore
     )
 
-    if await FindMany(ProvinceEntity).count() == 0:
-        for province_code in province_codes:
+    if not await ProvinceEntity.find_many().count():
+        for province_code, province_name in province_codes.items():
             municipalities: List[MunicipalityEmbeddedEntity] = []
-            for municip_code in municipality_codes:
-                if municip_code[:2] == province_code:
+            for municipality_code, municipality_name in municipality_codes.items():
+                if municipality_code[:2] == province_code:
                     municipalities.append(
                         MunicipalityEmbeddedEntity(
-                            name=municipality_codes[municip_code]
+                            name=municipality_name,
                         )
                     )
             await ProvinceEntity.insert_one(
                 ProvinceEntity(
-                    name=province_codes[province_code], municipalities=municipalities
+                    name=province_name,
+                    municipalities=municipalities,
                 )
             )
 
