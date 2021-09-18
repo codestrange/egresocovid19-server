@@ -1,5 +1,4 @@
 municipality_codes = {
-    "00.00": "Desconocido",
     "25.03": "Martí",
     "25.02": "Cárdenas",
     "23.06": "Habana del Este",
@@ -169,4 +168,3 @@ municipality_codes = {
     "35.05": "Maisí",
     "33.07": "Campechuela",
 }
-

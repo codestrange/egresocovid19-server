@@ -1,5 +1,4 @@
 province_codes = {
-    "00": "Desconocida",
     "23": "La Habana",
     "25": "Matanzas",
     "27": "Cienfuegos",
@@ -17,4 +16,3 @@ province_codes = {
     "22": "Artemisa",
     "24": "Mayabeque",
 }
-
