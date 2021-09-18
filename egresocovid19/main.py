@@ -1,15 +1,14 @@
+from typing import List
+
 from beanie import init_beanie
 from beanie.odm.queries.find import FindMany
-
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from typing import List
 
 from .api.v1.main import create_api as create_api_v1
 from .database import MunicipalityEmbeddedEntity, ProvinceEntity, client, entities
-
-from .static.provinces_codes import province_codes
 from .static.municipality_codes import municipality_codes
+from .static.provinces_codes import province_codes
 
 app = FastAPI(docs_url=None, redoc_url=None)
 
@@ -34,18 +33,20 @@ async def startup():
 
     if await FindMany(ProvinceEntity).count() == 0:
         for province_code in province_codes:
-            municipalities:List[MunicipalityEmbeddedEntity] = []
+            municipalities: List[MunicipalityEmbeddedEntity] = []
             for municip_code in municipality_codes:
                 if municip_code[:2] == province_code:
-                    municipalities.append(MunicipalityEmbeddedEntity(
-                        name = municipality_codes[municip_code]
-                    ))
-            await ProvinceEntity.insert_one(ProvinceEntity(
-                    name = province_codes[province_code],
-                    municipalities = municipalities
+                    municipalities.append(
+                        MunicipalityEmbeddedEntity(
+                            name=municipality_codes[municip_code]
+                        )
+                    )
+            await ProvinceEntity.insert_one(
+                ProvinceEntity(
+                    name=province_codes[province_code], municipalities=municipalities
                 )
-            ) 
-        
+            )
+
 
 @app.on_event("shutdown")
 async def shutdown():
