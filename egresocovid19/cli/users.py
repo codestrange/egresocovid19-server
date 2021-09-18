@@ -2,9 +2,7 @@ import typer
 from beanie import init_beanie
 from beanie.operators import RegEx
 
-from ..database import UserEntity
-from ..database import client as database_client
-from ..database import entities
+from ..database import UserEntity, client, entities
 from ..services.auth_service import AuthService
 from ..settings import get_settings
 from ..utils.run_sync import run_sync
@@ -31,7 +29,7 @@ def create(
 ):
     run_sync(
         init_beanie(
-            database=database_client.egresocovid19,
+            database=client.egresocovid19,
             document_models=entities,  # type: ignore
         )
     )
@@ -55,7 +53,7 @@ def lists(
 ):
     run_sync(
         init_beanie(
-            database=database_client.egresocovid19,
+            database=client.egresocovid19,
             document_models=entities,  # type: ignore
         )
     )
