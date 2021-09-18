@@ -22,3 +22,5 @@ jobs:
         ACCESS_TOKEN_SECRET_KEY: ${{ secrets.ACCESS_TOKEN_SECRET_KEY_TEST }}
         REFRESH_TOKEN_SECRET_KEY: ${{ secrets.REFRESH_TOKEN_SECRET_KEY_TEST }}
       run: make tests
+    - name: Upload coverage
+      uses: codecov/codecov-action@v1
