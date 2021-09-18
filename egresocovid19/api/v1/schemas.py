@@ -4,12 +4,12 @@ from typing import List, Optional
 from beanie import PydanticObjectId
 from fastapi_restful.api_model import APIModel
 
-from ...database import IncomeEmbeddedEntity
 from ...enums import (
     AftermathEnum,
     BloodTypeEnum,
     ContagionEnum,
     DiagnosisWayEnum,
+    IncomeEnum,
     ProphylaxisEnum,
     SexEnum,
     SkinColorEnum,
@@ -23,9 +23,14 @@ class PathologicalSchema(APIModel):
     treatments: str
 
 
+class IncomeSchema(APIModel):
+    income: IncomeEnum
+    days: int
+
+
 class DischargeOfPositiveCasesOfCovid19Schema(APIModel):
     detection_date: Optional[datetime]
-    symptoms: List[str]
+    symptoms: Optional[List[str]]
     duration_of_symptoms: Optional[int]
     diagnosis_way: Optional[DiagnosisWayEnum]
     test_used_in_diagnosis: Optional[TestDiagnosisEnum]
@@ -36,19 +41,24 @@ class DischargeOfPositiveCasesOfCovid19Schema(APIModel):
     was_he_part_of_an_event: Optional[bool]
     did_he_work_in_the_attention_to_positive_cases: Optional[bool]
     hospitalization_time: Optional[str]
-    incomes: List[IncomeEmbeddedEntity]
+    incomes: Optional[List[IncomeSchema]]
     contacts_first_level: Optional[int]
     contacts_first_level_positives: Optional[int]
     contacts_second_level: Optional[int]
     contacts_second_level_positives: Optional[int]
     contacts_third_level: Optional[int]
     contacts_third_level_positives: Optional[int]
-    treatments_received: List[TreatmentEnum]
-    antibiotics: List[str]
-    prophylaxis: List[ProphylaxisEnum]
+    treatments_received: Optional[List[TreatmentEnum]]
+    antibiotics: Optional[List[str]]
+    prophylaxis: Optional[List[ProphylaxisEnum]]
     another_vaccine_against_covid: Optional[str]
-    aftermath: List[AftermathEnum]
-    others_aftermath: List[str]
+    aftermath: Optional[List[AftermathEnum]]
+    others_aftermath: Optional[List[str]]
+
+
+class MunicipalitySchema(APIModel):
+    id: PydanticObjectId
+    name: str
 
 
 class PatientBaseSchema(APIModel):
@@ -73,9 +83,10 @@ class PatientGetSchema(PatientBaseSchema):
     id: PydanticObjectId
     province: str
     municipality: str
-    discharge_of_positive_cases_of_covid_19: Optional[
-        DischargeOfPositiveCasesOfCovid19Schema
-    ]
+
+
+class PatientGetDetailSchema(PatientGetSchema):
+    discharge_of_positive_cases_of_covid_19: DischargeOfPositiveCasesOfCovid19Schema
 
 
 class PatientPostSchema(PatientBaseSchema):
@@ -99,3 +110,9 @@ class PatientPutSchema(APIModel):
     personal_pathological_history: Optional[List[PathologicalSchema]]
     family_pathological_history: Optional[List[PathologicalSchema]]
     municipality: Optional[PydanticObjectId]
+
+
+class ProvinceSchema(APIModel):
+    id: PydanticObjectId
+    name: str
+    municipalities: List[MunicipalitySchema]

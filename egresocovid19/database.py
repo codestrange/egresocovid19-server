@@ -23,11 +23,16 @@ from .utils.base_entity import BaseEntity
 client = AsyncIOMotorClient(get_settings().database_url)
 
 
+class IncomeEmbeddedEntity(BaseModel):
+    income: IncomeEnum
+    days: int
+
+
 class DischargeOfPositiveCasesOfCovid19EmbeddedEntity(BaseModel):
     detection_date: Optional[datetime]
     # With autocompletation base on previous data and with default options
     # SymptomEntity
-    symptoms: List[PydanticObjectId]
+    symptoms: List[PydanticObjectId] = []
     duration_of_symptoms: Optional[int]
     diagnosis_way: Optional[DiagnosisWayEnum]
     test_used_in_diagnosis: Optional[TestDiagnosisEnum]
@@ -38,27 +43,22 @@ class DischargeOfPositiveCasesOfCovid19EmbeddedEntity(BaseModel):
     was_he_part_of_an_event: Optional[bool]
     did_he_work_in_the_attention_to_positive_cases: Optional[bool]
     hospitalization_time: Optional[str]
-    incomes: List["IncomeEmbeddedEntity"]
+    incomes: List[IncomeEmbeddedEntity] = []
     contacts_first_level: Optional[int]
     contacts_first_level_positives: Optional[int]
     contacts_second_level: Optional[int]
     contacts_second_level_positives: Optional[int]
     contacts_third_level: Optional[int]
     contacts_third_level_positives: Optional[int]
-    treatments_received: List[TreatmentEnum]
+    treatments_received: List[TreatmentEnum] = []
     # With autocompletation base on previous data
-    antibiotics: List[str]
-    prophylaxis: List[ProphylaxisEnum]
+    antibiotics: List[str] = []
+    prophylaxis: List[ProphylaxisEnum] = []
     # With autocompletation base on previous data
     another_vaccine_against_covid: Optional[str]
-    aftermath: List[AftermathEnum]
+    aftermath: List[AftermathEnum] = []
     # With autocompletation base on previous data
-    others_aftermath: List[str]
-
-
-class IncomeEmbeddedEntity(BaseModel):
-    income: IncomeEnum
-    days: int
+    others_aftermath: List[str] = []
 
 
 class MunicipalityEmbeddedEntity(BaseModel):
@@ -103,9 +103,9 @@ class PatientEntity(BaseEntity):
     personal_pathological_history: List[PathologicalEmbeddedEntity]
     # With autocompletation base on previous data and with default options
     family_pathological_history: List[PathologicalEmbeddedEntity]
-    discharge_of_positive_cases_of_covid_19: Optional[
-        DischargeOfPositiveCasesOfCovid19EmbeddedEntity
-    ]
+    discharge_of_positive_cases_of_covid_19: DischargeOfPositiveCasesOfCovid19EmbeddedEntity = Field(  # noqa: E501
+        default_factory=DischargeOfPositiveCasesOfCovid19EmbeddedEntity
+    )
 
     class Collection:
         name: str = "patients"
