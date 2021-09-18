@@ -1,6 +1,6 @@
 from .database import MunicipalityEmbeddedEntity, ProvinceEntity
 from .static.municipality_codes import municipality_codes
-from .static.provinces_codes import province_codes
+from .static.province_codes import province_codes
 
 
 async def initialize_provinces_data():
