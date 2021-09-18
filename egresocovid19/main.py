@@ -35,7 +35,7 @@ async def startup():
         for province_code, province_name in province_codes.items():
             municipalities: List[MunicipalityEmbeddedEntity] = []
             for municipality_code, municipality_name in municipality_codes.items():
-                if municipality_code[:2] == province_code:
+                if municipality_code.startswith(province_code):
                     municipalities.append(
                         MunicipalityEmbeddedEntity(
                             name=municipality_name,
