@@ -31,6 +31,7 @@ async def startup():
     )
 
     if not await ProvinceEntity.find_many().count():
+        provinces: List[ProvinceEntity] = []
         for province_code, province_name in province_codes.items():
             municipalities: List[MunicipalityEmbeddedEntity] = []
             for municipality_code, municipality_name in municipality_codes.items():
@@ -40,12 +41,13 @@ async def startup():
                             name=municipality_name,
                         )
                     )
-            await ProvinceEntity.insert_one(
+            provinces.append(
                 ProvinceEntity(
                     name=province_name,
                     municipalities=municipalities,
                 )
             )
+        await ProvinceEntity.insert_many(provinces)
 
 
 @app.on_event("shutdown")
