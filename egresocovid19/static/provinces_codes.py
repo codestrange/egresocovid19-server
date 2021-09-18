@@ -18,22 +18,3 @@ province_codes = {
     "24": "Mayabeque",
 }
 
-province_abbrs = {
-    "unk": "Desconocida",
-    "lha": "La Habana",
-    "mat": "Matanzas",
-    "cfg": "Cienfuegos",
-    "ssp": "Sancti Spíritus",
-    "ltu": "Las Tunas",
-    "hol": "Holguín",
-    "gra": "Granma",
-    "stg": "Santiago de Cuba",
-    "ijv": "Isla de la Juventud",
-    "cam": "Camagüey",
-    "cav": "Ciego de Ávila",
-    "vcl": "Villa Clara",
-    "gtm": "Guantánamo",
-    "pri": "Pinar del Río",
-    "art": "Artemisa",
-    "may": "Mayabeque",
-}
