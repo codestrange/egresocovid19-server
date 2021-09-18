@@ -1,7 +1,9 @@
 from beanie import init_beanie
-from beanie.odm.fields import PydanticObjectId
+from beanie.odm.queries.find import FindMany
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from typing import List
 
 from .api.v1.main import create_api as create_api_v1
 from .database import MunicipalityEmbeddedEntity, ProvinceEntity, client, entities
@@ -29,13 +31,13 @@ async def startup():
         database=client.egresocovid19,
         document_models=entities,  # type: ignore
     )
-    if len(await ProvinceEntity.find_all().to_list()) == 0:
+
+    if await FindMany(ProvinceEntity).count() == 0:
         for province_code in province_codes:
-            municipalities = []
+            municipalities:List[MunicipalityEmbeddedEntity] = []
             for municip_code in municipality_codes:
                 if municip_code[:2] == province_code:
                     municipalities.append(MunicipalityEmbeddedEntity(
-                        id = PydanticObjectId(),
                         name = municipality_codes[municip_code]
                     ))
             await ProvinceEntity.insert_one(ProvinceEntity(
