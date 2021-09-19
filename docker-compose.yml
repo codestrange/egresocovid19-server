@@ -2,7 +2,7 @@ version: '3'
 
 services:
   db:
-    image: docker.uclv.cu/mongodb
+    image: docker.uclv.cu/mongo
     env_file:
       - .env
   api:
