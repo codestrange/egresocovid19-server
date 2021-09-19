@@ -1,8 +1,10 @@
 FROM docker.uclv.cu/tiangolo/uvicorn-gunicorn-fastapi:python3.9-slim
 
+COPY poetry.lock .
+
 COPY pyproject.toml .
 
-COPY poetry.lock .
+RUN sudo apt install curl
 
 RUN curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -
 
