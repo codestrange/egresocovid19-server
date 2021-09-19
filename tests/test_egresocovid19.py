@@ -104,3 +104,60 @@ def test_get_patient():
         shared_dict["patient_firstname"] = json.get("firstname")
         shared_dict["patient_lastname"] = json.get("lastname")
         shared_dict["patient_ci"] = json.get("ci")
+
+
+@pytest.mark.depends(on=[test_get_patient.__name__])
+def test_get_patients_by_firstname():
+    assert shared_dict.get("patient_id")
+    assert shared_dict.get("patient_firstname")
+    patient_id = shared_dict.get("patient_id")
+    patient_firstname = shared_dict.get("patient_firstname")
+    with TestClient(app) as client:
+        api_v1.dependency_overrides[
+            get_current_active_user
+        ] = mock_get_current_active_user
+        response = client.get(f"api/v1/patients/search/{patient_firstname}")
+        assert response.status_code == 200
+        json = response.json()
+        assert json
+        assert isinstance(json, list)
+        assert all((isinstance(item, dict) for item in json))
+        assert any((item.get("id") == patient_id for item in json))
+
+
+@pytest.mark.depends(on=[test_get_patient.__name__])
+def test_get_patients_by_lastname():
+    assert shared_dict.get("patient_id")
+    assert shared_dict.get("patient_lastname")
+    patient_id = shared_dict.get("patient_id")
+    patient_lastname = shared_dict.get("patient_lastname")
+    with TestClient(app) as client:
+        api_v1.dependency_overrides[
+            get_current_active_user
+        ] = mock_get_current_active_user
+        response = client.get(f"api/v1/patients/search/{patient_lastname}")
+        assert response.status_code == 200
+        json = response.json()
+        assert json
+        assert isinstance(json, list)
+        assert all((isinstance(item, dict) for item in json))
+        assert any((item.get("id") == patient_id for item in json))
+
+
+@pytest.mark.depends(on=[test_get_patient.__name__])
+def test_get_patients_by_ci():
+    assert shared_dict.get("patient_id")
+    assert shared_dict.get("patient_ci")
+    patient_id = shared_dict.get("patient_id")
+    patient_ci = shared_dict.get("patient_ci")
+    with TestClient(app) as client:
+        api_v1.dependency_overrides[
+            get_current_active_user
+        ] = mock_get_current_active_user
+        response = client.get(f"api/v1/patients/search/{patient_ci}")
+        assert response.status_code == 200
+        json = response.json()
+        assert json
+        assert isinstance(json, list)
+        assert all((isinstance(item, dict) for item in json))
+        assert any((item.get("id") == patient_id for item in json))
