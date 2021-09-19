@@ -1,5 +1,5 @@
 from random import choice, randrange
-from typing import Any, Dict
+from typing import Any, Dict, cast
 
 import pytest
 from egresocovid19.api.v1.auth import get_current_active_user
@@ -161,3 +161,55 @@ def test_get_patients_by_ci():
         assert isinstance(json, list)
         assert all((isinstance(item, dict) for item in json))
         assert any((item.get("id") == patient_id for item in json))
+
+
+@pytest.mark.depends(on=[test_create_patient.__name__])
+def test_edit_patient_basic():
+    assert shared_dict.get("patient_id")
+    patient_id = shared_dict.get("patient_id")
+    with TestClient(app) as client:
+        api_v1.dependency_overrides[
+            get_current_active_user
+        ] = mock_get_current_active_user
+        fake_person = Person()
+        data = {
+            "firstname": fake_person.first_name(),
+        }
+        response = client.put(f"api/v1/patients/{patient_id}", json=data)
+        assert response.status_code == 200
+        json = response.json()
+        assert json
+        assert isinstance(json, dict)
+        assert json.get("id") == patient_id
+        assert json.get("firstname")
+        assert isinstance(json.get("firstname"), str)
+        shared_dict["patient_firstname"] = json.get("firstname")
+
+
+@pytest.mark.depends(on=[test_create_patient.__name__])
+def test_edit_patient_egreso():
+    assert shared_dict.get("patient_id")
+    patient_id = shared_dict.get("patient_id")
+    with TestClient(app) as client:
+        api_v1.dependency_overrides[
+            get_current_active_user
+        ] = mock_get_current_active_user
+        fake_person = Person()
+        data = {
+            "antibiotics": [fake_person.title()],
+        }
+        response = client.put(f"api/v1/patients/{patient_id}/egreso", json=data)
+        assert response.status_code == 200
+        json = response.json()
+        assert json
+        assert isinstance(json, dict)
+        assert json.get("id") == patient_id
+        assert json.get("dischargeOfPositiveCasesOfCovid19")
+        assert isinstance(json.get("dischargeOfPositiveCasesOfCovid19"), dict)
+        assert cast(dict, json.get("dischargeOfPositiveCasesOfCovid19")).get(
+            "antibiotics"
+        )
+        assert (
+            cast(dict, json.get("dischargeOfPositiveCasesOfCovid19")).get("antibiotics")
+            == data["antibiotics"]
+        )
