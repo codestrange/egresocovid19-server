@@ -206,7 +206,7 @@ def test_get_patient():
         shared_dict["patient_ci"] = json.get("ci")
 
 
-def test_get_patient_found():
+def test_get_patient_not_found():
     with TestClient(app) as client:
         api_v1.dependency_overrides[
             get_current_active_user
