@@ -1,11 +1,15 @@
 from random import choice, randrange
+from typing import Any, Dict
 
+import pytest
 from egresocovid19.api.v1.auth import get_current_active_user
 from egresocovid19.database import UserEntity
 from egresocovid19.main import api_v1, app
 from egresocovid19.static.municipality_codes import municipality_codes
 from fastapi.testclient import TestClient
 from mimesis import Address, Person
+
+shared_dict: Dict[str, Any] = {}
 
 
 async def mock_get_current_active_user() -> UserEntity:
@@ -37,7 +41,6 @@ def test_create_patient():
         ] = mock_get_current_active_user
         fake_person = Person()
         fake_address = Address()
-
         data = {
             "firstname": fake_person.first_name(),
             "lastname": fake_person.last_name(),
@@ -70,3 +73,34 @@ def test_create_patient():
         }
         response = client.post("api/v1/patients", json=data)
         assert response.status_code == 200
+        json = response.json()
+        assert json
+        assert isinstance(json, dict)
+        assert json.get("id")
+        assert isinstance(json.get("id"), str)
+        shared_dict["patient_id"] = json.get("id")
+
+
+@pytest.mark.depends(on=[test_create_patient.__name__])
+def test_get_patient():
+    assert shared_dict.get("patient_id")
+    patient_id = shared_dict.get("patient_id")
+    with TestClient(app) as client:
+        api_v1.dependency_overrides[
+            get_current_active_user
+        ] = mock_get_current_active_user
+        response = client.get(f"api/v1/patients/{patient_id}")
+        assert response.status_code == 200
+        json = response.json()
+        assert json
+        assert isinstance(json, dict)
+        assert json.get("id") == patient_id
+        assert json.get("firstname")
+        assert json.get("lastname")
+        assert json.get("ci")
+        assert isinstance(json.get("firstname"), str)
+        assert isinstance(json.get("lastname"), str)
+        assert isinstance(json.get("ci"), str)
+        shared_dict["patient_firstname"] = json.get("firstname")
+        shared_dict["patient_lastname"] = json.get("lastname")
+        shared_dict["patient_ci"] = json.get("ci")
