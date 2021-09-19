@@ -15,3 +15,6 @@ export:
 
 run: install
 	poetry run uvicorn egresocovid19.main:app --reload --host ${HOST} --port ${PORT}
+
+deploy:
+	docker-compose build && docker-compose up -d
