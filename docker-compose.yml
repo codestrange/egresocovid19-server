@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  db:
+    image: docker.uclv.cu/mongodb
+    env_file:
+      - .env
+  api:
+    build:
+      dockerfile: Dockerfile
+      context: .
+    env_file:
+      - .env
+    depends_on:
+      - db
+    ports:
+      - "8000:80"
