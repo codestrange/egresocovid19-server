@@ -12,6 +12,8 @@ RUN apt --assume-yes install curl
 
 RUN curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -
 
+RUN source $HOME/.poetry/env
+
 RUN poetry config settings.virtualenvs.create false
 
 RUN poetry install
