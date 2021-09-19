@@ -82,7 +82,7 @@ class PatientsController:
         if old_patient:
             raise BadRequest("Already exists a patient with same CI")
         province, municipality = await self._get_province_and_municipality(
-            schema.municipality
+            schema.municipality_code
         )
         if not province or not municipality:
             raise NotFound("Municipality")
@@ -134,11 +134,13 @@ class PatientsController:
         )
         if old_patient:
             raise BadRequest("Already exists a patient with same CI")
-        municipality_id = (
-            schema.municipality if schema.municipality else actual_patient.municipality
+        municipality_code = (
+            schema.municipality_code
+            if schema.municipality_code
+            else actual_patient.municipality_code
         )
         province, municipality = await self._get_province_and_municipality(
-            municipality_id
+            municipality_code
         )
         if not province or not municipality:
             raise NotFound("Municipality")
@@ -224,19 +226,20 @@ class PatientsController:
         return await self._get_patient_detail_schema(actual_patient)
 
     async def _get_province_and_municipality(
-        self, municipality_id: PydanticObjectId
+        self,
+        municipality_code: str,
     ) -> Tuple[Optional[ProvinceEntity], Optional[MunicipalityEmbeddedEntity]]:
         province = next(
             (
                 p
                 for p in await ProvinceEntity.find_all().to_list()
-                if any((p.id == municipality_id for p in p.municipalities))
+                if any((p.code == municipality_code for p in p.municipalities))
             ),
             None,
         )
         municipality = (
             next(
-                (m for m in province.municipalities if m.id == municipality_id),
+                (m for m in province.municipalities if m.code == municipality_code),
                 None,
             )
             if province
@@ -264,7 +267,7 @@ class PatientsController:
                         else await ProvinceEntity.find_all().to_list()
                     )
                     for municipality in province.municipalities
-                    if municipality.id == patient.municipality
+                    if municipality.code == patient.municipality_code
                 )
             )
         )
@@ -277,7 +280,6 @@ class PatientsController:
         return PatientGetSchema(
             **patient.dict(
                 exclude={
-                    "municipality",
                     "personal_pathological_history",
                     "family_pathological_history",
                     "discharge_of_positive_cases_of_covid_19",

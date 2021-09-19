@@ -57,8 +57,8 @@ class DischargeOfPositiveCasesOfCovid19Schema(APIModel):
 
 
 class MunicipalitySchema(APIModel):
-    id: PydanticObjectId
     name: str
+    code: str
 
 
 class PatientBaseSchema(APIModel):
@@ -90,7 +90,7 @@ class PatientGetDetailSchema(PatientGetSchema):
 
 
 class PatientPostSchema(PatientBaseSchema):
-    municipality: PydanticObjectId
+    municipality_code: str
 
 
 class PatientPutSchema(APIModel):
@@ -109,10 +109,11 @@ class PatientPutSchema(APIModel):
     block_number: Optional[int]
     personal_pathological_history: Optional[List[PathologicalSchema]]
     family_pathological_history: Optional[List[PathologicalSchema]]
-    municipality: Optional[PydanticObjectId]
+    municipality_code: Optional[str]
 
 
 class ProvinceSchema(APIModel):
     id: PydanticObjectId
     name: str
+    code: str
     municipalities: List[MunicipalitySchema]

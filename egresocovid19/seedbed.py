@@ -9,9 +9,10 @@ async def initialize_provinces_data():
             [
                 ProvinceEntity(
                     name=p_name,
+                    code=p_code,
                     municipalities=list(
                         map(
-                            lambda m: MunicipalityEmbeddedEntity(name=m[1]),
+                            lambda m: MunicipalityEmbeddedEntity(name=m[1], code=m[0]),
                             filter(
                                 lambda m: m[0].startswith(p_code),
                                 municipality_codes.items(),

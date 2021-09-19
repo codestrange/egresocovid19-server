@@ -62,8 +62,8 @@ class DischargeOfPositiveCasesOfCovid19EmbeddedEntity(BaseModel):
 
 
 class MunicipalityEmbeddedEntity(BaseModel):
-    id: PydanticObjectId = Field(default_factory=PydanticObjectId)
     name: str
+    code: str
 
 
 class PathologicalEmbeddedEntity(BaseModel):
@@ -88,8 +88,7 @@ class PatientEntity(BaseEntity):
     skin_color: SkinColorEnum
     blood_type: Optional[BloodTypeEnum]
     address: str
-    # MunicipalityEmbeddedEntity
-    municipality: PydanticObjectId
+    municipality_code: str
     # With autocompletation base on previous data
     polyclinic: str
     # With autocompletation base on previous data
@@ -113,6 +112,7 @@ class PatientEntity(BaseEntity):
 
 class ProvinceEntity(BaseEntity):
     name: str
+    code: str
     municipalities: List[MunicipalityEmbeddedEntity]
 
     class Collection:
