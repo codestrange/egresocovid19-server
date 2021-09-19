@@ -90,14 +90,14 @@ class PatientsController:
             ),
             personal_pathological_history=[
                 PathologicalEmbeddedEntity(
-                    pathological=pathologicals[p.name].id,
+                    pathological=pathologicals[p.name.lower()].id,
                     treatments=p.treatments,
                 )
                 for p in schema.personal_pathological_history
             ],
             family_pathological_history=[
                 PathologicalEmbeddedEntity(
-                    pathological=pathologicals[p.name].id,
+                    pathological=pathologicals[p.name.lower()].id,
                     treatments=p.treatments,
                 )
                 for p in schema.family_pathological_history
@@ -198,7 +198,7 @@ class PatientsController:
         if schema.symptoms is not None:
             symptoms = await self._get_symptoms_entities_from_schemas(schema.symptoms)
             actual_patient.discharge_of_positive_cases_of_covid_19.symptoms = [
-                cast(PydanticObjectId, symptoms[s].id)
+                cast(PydanticObjectId, symptoms[s.lower()].id)
                 for s in schema.symptoms
                 if s in symptoms
             ]
