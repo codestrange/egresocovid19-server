@@ -2,7 +2,7 @@ version: '3'
 
 services:
   db:
-    container: egresocovid19-db
+    container_name: egresocovid19-db
     image: docker.uclv.cu/mongo
     env_file:
       - .env
@@ -10,7 +10,7 @@ services:
       - ~/egresocovid19_db:/data/db
     restart: unless-stopped
   api:
-    container: egresocovid19-api
+    container_name: egresocovid19-api
     build:
       dockerfile: Dockerfile
       context: .
