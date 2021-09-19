@@ -1,4 +1,4 @@
-from typing import cast
+from typing import List, cast
 
 from beanie.operators import NE, Eq, RegEx
 from pydantic import BaseModel
@@ -70,15 +70,18 @@ class AutoCompleteService:
             yield item.name
 
     async def get_antibiotics(self, query: str):
+        class Interal(BaseModel):
+            antibiotics: List[str]
+
         class Projection(BaseModel):
-            antibiotics: str
+            discharge_of_positive_cases_of_covid_19: Interal
 
         antibiotics = [
             antibiotic
             async for item in PatientEntity.find(
                 NE(PatientEntity.discharge_of_positive_cases_of_covid_19, None)
             ).project(Projection)
-            for antibiotic in item.antibiotics
+            for antibiotic in item.discharge_of_positive_cases_of_covid_19.antibiotics
         ]
         query_lower = query.lower()
         return filter(lambda x: query_lower in x.lower(), antibiotics)
@@ -112,19 +115,21 @@ class AutoCompleteService:
         ).project(
             Projection
         ):
-            result = item.discharge_of_positive_cases_of_covid_19
-            yield result.another_vaccine_against_covid
+            yield item.discharge_of_positive_cases_of_covid_19.another_vaccine_against_covid  # noqa: E501
 
     async def get_others_aftermaths(self, query: str):
+        class Internal(BaseModel):
+            others_aftermath: List[str]
+
         class Projection(BaseModel):
-            others_aftermath: str
+            discharge_of_positive_cases_of_covid_19: Internal
 
         others_aftermaths = [
             aftermath
             async for item in PatientEntity.find(
                 NE(PatientEntity.discharge_of_positive_cases_of_covid_19, None)
             ).project(Projection)
-            for aftermath in item.others_aftermath
+            for aftermath in item.discharge_of_positive_cases_of_covid_19.others_aftermath  # noqa: E501
         ]
         query_lower = query.lower()
         return filter(lambda x: query_lower in x.lower(), others_aftermaths)

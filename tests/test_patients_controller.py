@@ -26,16 +26,6 @@ async def mock_get_current_active_user() -> UserEntity:
     )
 
 
-def test_provinces():
-    with TestClient(app) as client:
-        api_v1.dependency_overrides[
-            get_current_active_user
-        ] = mock_get_current_active_user
-        response = client.get("/api/v1/provinces")
-        assert response.status_code == 200
-        assert len(response.json()) == 16
-
-
 def test_create_patient():
     with TestClient(app) as client:
         api_v1.dependency_overrides[
