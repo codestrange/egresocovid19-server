@@ -61,11 +61,6 @@ class DischargeOfPositiveCasesOfCovid19EmbeddedEntity(BaseModel):
     others_aftermath: List[str] = []
 
 
-class MunicipalityEmbeddedEntity(BaseModel):
-    name: str
-    code: str
-
-
 class PathologicalEmbeddedEntity(BaseModel):
     pathological: PydanticObjectId
     treatments: str
@@ -110,15 +105,6 @@ class PatientEntity(BaseEntity):
         name: str = "patients"
 
 
-class ProvinceEntity(BaseEntity):
-    name: str
-    code: str
-    municipalities: List[MunicipalityEmbeddedEntity]
-
-    class Collection:
-        name: str = "provinces"
-
-
 class SymptomEntity(BaseEntity):
     name: str
     default: bool = False
@@ -143,7 +129,6 @@ class UserEntity(BaseEntity):
 entities = [
     PathologicalEntity,
     PatientEntity,
-    ProvinceEntity,
     SymptomEntity,
     UserEntity,
 ]

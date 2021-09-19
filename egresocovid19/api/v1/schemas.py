@@ -113,7 +113,6 @@ class PatientPutSchema(APIModel):
 
 
 class ProvinceSchema(APIModel):
-    id: PydanticObjectId
     name: str
     code: str
     municipalities: List[MunicipalitySchema]

@@ -1,5 +1,5 @@
 from functools import reduce
-from typing import Dict, List, Optional, Tuple, cast
+from typing import Dict, List, Optional, cast
 
 from beanie import PydanticObjectId
 from beanie.operators import NE, And, Eq, In, Or, RegEx
@@ -8,16 +8,15 @@ from fastapi_restful.cbv import cbv
 from fastapi_restful.inferring_router import InferringRouter
 
 from ....database import (
-    MunicipalityEmbeddedEntity,
     PathologicalEmbeddedEntity,
     PathologicalEntity,
     PatientEntity,
-    ProvinceEntity,
     SymptomEntity,
     UserEntity,
 )
 from ....exceptions.bad_request import BadRequest
 from ....exceptions.not_found import NotFound
+from ....services.province_service import ProvinceService
 from ....utils.bad_request_response import bad_request_response
 from ....utils.not_found_response import not_found_response
 from ..auth import get_current_active_user
@@ -36,6 +35,7 @@ router = InferringRouter(tags=["Patients"])
 @cbv(router)
 class PatientsController:
     current_user: UserEntity = Depends(get_current_active_user)
+    province_service: ProvinceService = Depends()
 
     @router.get("/patients/search/{query}")
     async def get_patients(self, query: str) -> List[PatientGetSchema]:
@@ -54,12 +54,10 @@ class PatientsController:
             ),
         )
         result = await PatientEntity.find(ors).to_list()
-        provinces = await ProvinceEntity.find_all().to_list()
         pathologicals = await PathologicalEntity.find_all().to_list()
         return [
             await self._get_patient_schema(
                 item,
-                cache_provinces=provinces,
                 cache_pathologicals=pathologicals,
             )
             for item in result
@@ -81,10 +79,7 @@ class PatientsController:
         old_patient = await PatientEntity.find_one(PatientEntity.ci == schema.ci)
         if old_patient:
             raise BadRequest("Already exists a patient with same CI")
-        province, municipality = await self._get_province_and_municipality(
-            schema.municipality_code
-        )
-        if not province or not municipality:
+        if not self.province_service.get_municipality(schema.municipality_code):
             raise NotFound("Municipality")
         pathologicals = await self._get_pathologicals_entities_from_schemas(
             schema.family_pathological_history + schema.personal_pathological_history
@@ -111,8 +106,6 @@ class PatientsController:
         await patient.save()
         return await self._get_patient_schema(
             patient,
-            pre_selected_municipality=municipality.name,
-            pre_selected_province=province.name,
             cache_pathologicals=list(pathologicals.values()),
         )
 
@@ -139,10 +132,7 @@ class PatientsController:
             if schema.municipality_code
             else actual_patient.municipality_code
         )
-        province, municipality = await self._get_province_and_municipality(
-            municipality_code
-        )
-        if not province or not municipality:
+        if not self.province_service.get_municipality(municipality_code):
             raise NotFound("Municipality")
         pathologicals: Optional[Dict[str, PathologicalEntity]] = None
         if (
@@ -189,8 +179,6 @@ class PatientsController:
         await updated_patient.save()
         return await self._get_patient_detail_schema(
             updated_patient,
-            pre_selected_province=province.name,
-            pre_selected_municipality=municipality.name,
             cache_pathologicals=list(pathologicals.values()) if pathologicals else None,
         )
 
@@ -225,52 +213,14 @@ class PatientsController:
         await actual_patient.save()
         return await self._get_patient_detail_schema(actual_patient)
 
-    async def _get_province_and_municipality(
-        self,
-        municipality_code: str,
-    ) -> Tuple[Optional[ProvinceEntity], Optional[MunicipalityEmbeddedEntity]]:
-        province = next(
-            (
-                p
-                for p in await ProvinceEntity.find_all().to_list()
-                if any((p.code == municipality_code for p in p.municipalities))
-            ),
-            None,
-        )
-        municipality = (
-            next(
-                (m for m in province.municipalities if m.code == municipality_code),
-                None,
-            )
-            if province
-            else None
-        )
-        return province, municipality
-
     async def _get_patient_schema(
         self,
         patient: PatientEntity,
-        pre_selected_province: Optional[str] = None,
-        pre_selected_municipality: Optional[str] = None,
-        cache_provinces: Optional[List[ProvinceEntity]] = None,
         cache_pathologicals: Optional[List[PathologicalEntity]] = None,
     ) -> PatientGetSchema:
-        municipality, province = (
-            (pre_selected_municipality, pre_selected_province)
-            if pre_selected_municipality and pre_selected_province
-            else next(
-                (
-                    (municipality.name, province.name)
-                    for province in (
-                        cache_provinces
-                        if cache_provinces
-                        else await ProvinceEntity.find_all().to_list()
-                    )
-                    for municipality in province.municipalities
-                    if municipality.code == patient.municipality_code
-                )
-            )
-        )
+        municipality = self.province_service.get_municipality(patient.municipality_code)
+        if not municipality:
+            raise NotFound("Municipality")
         pathologicals = (
             cache_pathologicals
             if cache_pathologicals
@@ -285,8 +235,8 @@ class PatientsController:
                     "discharge_of_positive_cases_of_covid_19",
                 }
             ),
-            municipality=municipality,
-            province=province,
+            municipality=municipality.name,
+            province=municipality.province.name,
             personal_pathological_history=[
                 PathologicalSchema(
                     name=pathologicals_dict[p.pathological],
@@ -306,16 +256,10 @@ class PatientsController:
     async def _get_patient_detail_schema(
         self,
         patient: PatientEntity,
-        pre_selected_province: Optional[str] = None,
-        pre_selected_municipality: Optional[str] = None,
-        cache_provinces: Optional[List[ProvinceEntity]] = None,
         cache_pathologicals: Optional[List[PathologicalEntity]] = None,
     ) -> PatientGetDetailSchema:
         schema = await self._get_patient_schema(
             patient,
-            pre_selected_province,
-            pre_selected_municipality,
-            cache_provinces,
             cache_pathologicals,
         )
         symptoms = await SymptomEntity.find_all().to_list()
