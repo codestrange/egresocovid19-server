@@ -18,3 +18,9 @@ run: install
 
 deploy:
 	docker-compose build && docker-compose up -d
+
+enter_to_api:
+	docker exec -t egresocovid19-api /bin/bash
+
+enter_to_db:
+	docker exec -t egresocovid19-db /bin/bash
