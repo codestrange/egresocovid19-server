@@ -4,7 +4,7 @@ COPY poetry.lock .
 
 COPY pyproject.toml .
 
-RUN sudo apt install curl
+RUN apt install curl
 
 RUN curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -
 
