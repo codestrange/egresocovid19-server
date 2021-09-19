@@ -39,7 +39,7 @@ class PatientsController:
 
     @router.get("/patients/search/{query}")
     async def get_patients(self, query: str) -> List[PatientGetSchema]:
-        words = query.strip().lower().split(" ")
+        words = query.strip().split(" ")
         ors = reduce(
             lambda acc, item: Or(acc, item),
             map(
@@ -90,14 +90,14 @@ class PatientsController:
             ),
             personal_pathological_history=[
                 PathologicalEmbeddedEntity(
-                    pathological=pathologicals[p.name.lower()].id,
+                    pathological=pathologicals[p.name].id,
                     treatments=p.treatments,
                 )
                 for p in schema.personal_pathological_history
             ],
             family_pathological_history=[
                 PathologicalEmbeddedEntity(
-                    pathological=pathologicals[p.name.lower()].id,
+                    pathological=pathologicals[p.name].id,
                     treatments=p.treatments,
                 )
                 for p in schema.family_pathological_history
@@ -198,7 +198,7 @@ class PatientsController:
         if schema.symptoms is not None:
             symptoms = await self._get_symptoms_entities_from_schemas(schema.symptoms)
             actual_patient.discharge_of_positive_cases_of_covid_19.symptoms = [
-                cast(PydanticObjectId, symptoms[s.lower()].id)
+                cast(PydanticObjectId, symptoms[s].id)
                 for s in schema.symptoms
                 if s in symptoms
             ]
@@ -282,11 +282,11 @@ class PatientsController:
         self,
         pathologicals: List[PathologicalSchema],
     ) -> Dict[str, PathologicalEntity]:
-        ps_input = list({p.name.lower() for p in pathologicals})
+        ps_input = list({p.name for p in pathologicals})
         ps_in_db = await PathologicalEntity.find(
-            In(PathologicalEntity.name.lower(), ps_input)
+            In(PathologicalEntity.name, ps_input)
         ).to_list()
-        ps_dict = {p.name.lower(): p for p in ps_in_db}
+        ps_dict = {p.name: p for p in ps_in_db}
         new_ps = [PathologicalEntity(name=p) for p in ps_input if p not in ps_dict]
         if new_ps:
             result = await PathologicalEntity.insert_many(new_ps)
@@ -301,9 +301,9 @@ class PatientsController:
     ) -> Dict[str, SymptomEntity]:
         symptoms_input = list({p for p in symptoms})
         symptoms_in_db = await SymptomEntity.find(
-            In(SymptomEntity.name.lower(), symptoms_input)
+            In(SymptomEntity.name, symptoms_input)
         ).to_list()
-        symptoms_dict = {p.name.lower(): p for p in symptoms_in_db}
+        symptoms_dict = {p.name: p for p in symptoms_in_db}
         new_symptoms = [
             SymptomEntity(name=p) for p in symptoms_input if p not in symptoms_dict
         ]
