@@ -43,7 +43,6 @@ def test_get_provinces():
         response = client.post("api/v1/auth/token", data=data)
         assert response.status_code == 200
         json = response.json()
-        print(json)
         assert json
         assert isinstance(json, dict)
         assert json.get("access_token")
@@ -78,8 +77,6 @@ def test_get_provinces_with_disabled_user():
     password = shared_dict.get("password_disabled")
     assert username
     assert password
-    print(username)
-    print(password)
     with TestClient(app) as client:
         data = {
             "grant_type": "password",
@@ -89,7 +86,6 @@ def test_get_provinces_with_disabled_user():
         response = client.post("api/v1/auth/token", data=data)
         assert response.status_code == 200
         json = response.json()
-        print(json)
         assert json
         assert isinstance(json, dict)
         assert json.get("access_token")

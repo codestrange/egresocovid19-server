@@ -44,8 +44,6 @@ def test_auth_token_access():
     password = shared_dict.get("password")
     assert username
     assert password
-    print(username)
-    print(password)
     with TestClient(app) as client:
         data = {
             "grant_type": "password",
@@ -55,7 +53,6 @@ def test_auth_token_access():
         response = client.post("api/v1/auth/token", data=data)
         assert response.status_code == 200
         json = response.json()
-        print(json)
         assert json
         assert isinstance(json, dict)
         assert json.get("access_token")
