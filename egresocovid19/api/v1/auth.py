@@ -31,12 +31,12 @@ async def get_current_user(
     return user
 
 
-async def get_current_active_user(
+def get_current_active_user(
     user: UserEntity = Depends(get_current_user),
 ) -> UserEntity:
     if user.disabled:
         raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
+            status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Inactive user",
         )
     return user

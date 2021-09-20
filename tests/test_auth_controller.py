@@ -1,11 +1,13 @@
+from typing import Any, Dict
+
 import pytest
 from egresocovid19.cli import app as cli_app
-from egresocovid19.main import app
+from egresocovid19.main import api_v1, app
 from fastapi.testclient import TestClient
 from mimesis import Person
 from typer.testing import CliRunner
 
-from .shared_dict import shared_dict
+shared_dict: Dict[str, Any] = {}
 
 runner = CliRunner()
 
@@ -26,6 +28,7 @@ def test_cli_users_create():
 
 
 def test_auth_token_invalid_grant_type():
+    api_v1.dependency_overrides = {}
     with TestClient(app) as client:
         data = {
             "grant_type": "invalid_grant_type",
@@ -36,6 +39,7 @@ def test_auth_token_invalid_grant_type():
 
 @pytest.mark.depends(on=[test_cli_users_create.__name__])
 def test_auth_token_access():
+    api_v1.dependency_overrides = {}
     username = shared_dict.get("username")
     password = shared_dict.get("password")
     assert username
@@ -63,6 +67,7 @@ def test_auth_token_access():
 
 
 def test_auth_token_access_without_username_and_password():
+    api_v1.dependency_overrides = {}
     with TestClient(app) as client:
         data = {
             "grant_type": "password",
@@ -73,6 +78,7 @@ def test_auth_token_access_without_username_and_password():
 
 @pytest.mark.depends(on=[test_cli_users_create.__name__])
 def test_auth_token_access_error_username():
+    api_v1.dependency_overrides = {}
     password = shared_dict.get("password", None)
     assert password
     with TestClient(app) as client:
@@ -88,6 +94,7 @@ def test_auth_token_access_error_username():
 
 @pytest.mark.depends(on=[test_cli_users_create.__name__])
 def test_auth_token_access_error_password():
+    api_v1.dependency_overrides = {}
     username = shared_dict.get("username", None)
     assert username
     with TestClient(app) as client:
@@ -103,6 +110,7 @@ def test_auth_token_access_error_password():
 
 @pytest.mark.depends(on=[test_auth_token_access.__name__])
 def test_auth_token_refresh():
+    api_v1.dependency_overrides = {}
     refresh_token = shared_dict.get("refresh_token", None)
     assert refresh_token
     with TestClient(app) as client:
@@ -124,6 +132,7 @@ def test_auth_token_refresh():
 
 
 def test_auth_token_refresh_incorrect():
+    api_v1.dependency_overrides = {}
     with TestClient(app) as client:
         data = {
             "grant_type": "refresh_token",
@@ -134,6 +143,7 @@ def test_auth_token_refresh_incorrect():
 
 
 def test_auth_token_refresh_without_refresh_token():
+    api_v1.dependency_overrides = {}
     with TestClient(app) as client:
         data = {
             "grant_type": "refresh_token",
