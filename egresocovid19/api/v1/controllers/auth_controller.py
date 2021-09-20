@@ -93,13 +93,13 @@ class AuthController:
                     headers={"WWW-Authenticate": "Bearer"},
                 )
         access_token = self.auth_service.create_access_token(
-            user_or_id=user,
+            user=user,
             expires_delta=timedelta(
                 minutes=self.settings.access_token_expire_minutes,
             ),
         )
         refresh_token = self.auth_service.create_refresh_token(
-            user_or_id=user,
+            user=user,
             expires_delta=timedelta(
                 minutes=self.settings.refresh_token_expire_minutes,
             ),

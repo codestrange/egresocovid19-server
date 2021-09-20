@@ -1,5 +1,5 @@
 from datetime import datetime, timedelta
-from typing import Optional, Union
+from typing import Optional
 from uuid import uuid4
 
 from fastapi import Depends
@@ -35,11 +35,11 @@ class AuthService:
 
     def create_access_token(
         self,
-        user_or_id: Union[UserEntity, str],
+        user: UserEntity,
         expires_delta: timedelta = timedelta(minutes=15),
     ) -> str:
         return self._create_generic_token(
-            user_or_id,
+            user,
             expires_delta,
             self.settings.access_token_secret_key,
             self.settings.access_token_algorithm,
@@ -47,11 +47,11 @@ class AuthService:
 
     def create_refresh_token(
         self,
-        user_or_id: Union[UserEntity, str],
+        user: UserEntity,
         expires_delta: timedelta = timedelta(minutes=24 * 60),
     ) -> str:
         return self._create_generic_token(
-            user_or_id,
+            user,
             expires_delta,
             self.settings.refresh_token_secret_key,
             self.settings.refresh_token_algorithm,
@@ -59,16 +59,13 @@ class AuthService:
 
     def _create_generic_token(
         self,
-        user_or_id: Union[UserEntity, str],
+        user: UserEntity,
         expires_delta: timedelta,
         secret_key: str,
         algorithm: str,
     ) -> str:
         to_encode: dict = {}
-        if isinstance(user_or_id, UserEntity):
-            to_encode["sub"] = str(user_or_id.id)
-        else:
-            to_encode["sub"] = str(user_or_id)
+        to_encode["sub"] = str(user.id)
         to_encode["rand"] = str(uuid4())
         expire = datetime.utcnow() + expires_delta
         to_encode.update({"exp": expire})
