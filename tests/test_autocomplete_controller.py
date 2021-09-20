@@ -1,12 +1,8 @@
-from typing import Any, Dict
-
 from egresocovid19.api.v1.auth import get_current_active_user
 from egresocovid19.database import UserEntity
 from egresocovid19.main import api_v1, app
 from fastapi.testclient import TestClient
 from mimesis import Text
-
-shared_dict: Dict[str, Any] = {}
 
 
 async def mock_get_current_active_user() -> UserEntity:
