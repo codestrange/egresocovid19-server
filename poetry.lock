@@ -66,7 +66,7 @@ typecheck = ["mypy"]
 
 [[package]]
 name = "beanie"
-version = "1.6.3"
+version = "1.7.0"
 description = "Asynchronous Python ODM for MongoDB"
 category = "main"
 optional = false
@@ -947,7 +947,7 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.9"
-content-hash = "c9656560b4a45224e0ad81f8e5abeabdffbabdf35e16eac1f6505d532f0618ca"
+content-hash = "97754e50a5445686a361c82b76fea23d7334eec9187bc996bfc455cf64436de9"
 
 [metadata.files]
 anyio = [
@@ -976,8 +976,8 @@ bcrypt = [
     {file = "bcrypt-3.2.0.tar.gz", hash = "sha256:5b93c1726e50a93a033c36e5ca7fdcd29a5c7395af50a6892f5d9e7c6cfbfb29"},
 ]
 beanie = [
-    {file = "beanie-1.6.3-py3-none-any.whl", hash = "sha256:cd6dd300e554ed43173ef4e4582d51f287e3368e809007d03473f1e03aa7caa8"},
-    {file = "beanie-1.6.3.tar.gz", hash = "sha256:10245f2343818c835d8763d3ef4b8aa2875e42234a6c8f64fcd04136b7f07fdd"},
+    {file = "beanie-1.7.0-py3-none-any.whl", hash = "sha256:df93a2573ecf65a4f36378ddf6c759218a6790853fed272ae21ab5a8a1397dae"},
+    {file = "beanie-1.7.0.tar.gz", hash = "sha256:d22684004351ae6a6d1d1436cfd8ac0ccf0f4b6dc7a424e5a462ca895cee1549"},
 ]
 black = [
     {file = "black-21.9b0-py3-none-any.whl", hash = "sha256:380f1b5da05e5a1429225676655dddb96f5ae8c75bdf91e53d798871b902a115"},
