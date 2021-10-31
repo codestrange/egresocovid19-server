@@ -8,5 +8,9 @@ class BaseEntity(Document):
     async def get_or_404(cls, id: PydanticObjectId):
         entity = await cls.get(id)
         if entity is None:
-            raise NotFound(cls.__name__.removesuffix("Entity"))
+            suffix = "Entity"
+            name = cls.__name__
+            if cls.__name__.endswith(suffix):
+                name = cls.__name__[: -len(suffix)]
+            raise NotFound(name)
         return entity
