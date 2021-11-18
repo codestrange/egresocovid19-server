@@ -81,7 +81,7 @@ yarl = ">=1.6.3,<2.0.0"
 
 [[package]]
 name = "black"
-version = "21.10b0"
+version = "21.11b0"
 description = "The uncompromising code formatter."
 category = "dev"
 optional = false
@@ -948,7 +948,7 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "a11cd3b6c33eb8023c4a6cab81a8b40ec4ad24b22b0ecb2df5244535052c3026"
+content-hash = "b129be99d2f2af242e2eafc3c80fca9823be6a062ecaa0700640c8c8d344a8da"
 
 [metadata.files]
 anyio = [
@@ -981,8 +981,8 @@ beanie = [
     {file = "beanie-1.7.2.tar.gz", hash = "sha256:5d2fc9e8abd259b1d740a42fd250552fd18bceeb1be433585437f4df01ee882d"},
 ]
 black = [
-    {file = "black-21.10b0-py3-none-any.whl", hash = "sha256:6eb7448da9143ee65b856a5f3676b7dda98ad9abe0f87fce8c59291f15e82a5b"},
-    {file = "black-21.10b0.tar.gz", hash = "sha256:a9952229092e325fe5f3dae56d81f639b23f7131eb840781947e4b2886030f33"},
+    {file = "black-21.11b0-py3-none-any.whl", hash = "sha256:0b1f66cbfadcd332ceeaeecf6373d9991d451868d2e2219ad0ac1213fb701117"},
+    {file = "black-21.11b0.tar.gz", hash = "sha256:83f3852301c8dcb229e9c444dd79f573c8d31c7c2dad9bbaaa94c808630e32aa"},
 ]
 certifi = [
     {file = "certifi-2021.10.8-py2.py3-none-any.whl", hash = "sha256:d62a0163eb4c2344ac042ab2bdf75399a71a2d8c7d47eac2e2ee91b9d6339569"},
