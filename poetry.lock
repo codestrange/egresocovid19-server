@@ -228,7 +228,7 @@ idna = ">=2.0.0"
 
 [[package]]
 name = "fastapi"
-version = "0.71.0"
+version = "0.72.0"
 description = "FastAPI framework, high performance, easy to learn, fast to code, ready for production"
 category = "main"
 optional = false
@@ -959,7 +959,7 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "4c33787111db0560fa2dcd2577ba6449f6b6ccf4dbd014a795c76618872dbd26"
+content-hash = "b3dbe2bb3f4718844b83bef806b3378cdc1d81bfbd789f59eb670ab88d60cd99"
 
 [metadata.files]
 anyio = [
@@ -1150,8 +1150,8 @@ email-validator = [
     {file = "email_validator-1.1.3.tar.gz", hash = "sha256:aa237a65f6f4da067119b7df3f13e89c25c051327b2b5b66dc075f33d62480d7"},
 ]
 fastapi = [
-    {file = "fastapi-0.71.0-py3-none-any.whl", hash = "sha256:a78eca6b084de9667f2d5f37e2ae297270e5a119cd01c2f04815795da92fc87f"},
-    {file = "fastapi-0.71.0.tar.gz", hash = "sha256:2b5ac0ae89c80b40d1dd4b2ea0bb1f78d7c4affd3644d080bf050f084759fff2"},
+    {file = "fastapi-0.72.0-py3-none-any.whl", hash = "sha256:7421a2f30e9ed1866874cff089733d4f9a0cd4f49b6ea3995c0de75e32bbb52f"},
+    {file = "fastapi-0.72.0.tar.gz", hash = "sha256:019ec52c00581bc055e6dfb621aaa9c2a56007c283839305412e1073a777eaf1"},
 ]
 fastapi-restful = [
     {file = "FastApi-RESTful-0.4.0.tar.gz", hash = "sha256:cb3ec0d49904305bb62f5ae6133b43c41995aa15955cceee76383b51c7f44788"},
