@@ -1,6 +1,7 @@
 import typer
 from beanie import init_beanie
 from beanie.operators import RegEx
+from pydantic import EmailStr
 
 from ..database import UserEntity, client, entities
 from ..services.auth_service import AuthService
@@ -36,7 +37,7 @@ def create(
     hashed_password = auth_service.get_password_hash(password)
     user = UserEntity(
         name=name,
-        email=email,
+        email=EmailStr(email),
         phone=phone,
         hashed_password=hashed_password,
         email_confirmed=email_confirmed,

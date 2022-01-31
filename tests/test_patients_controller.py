@@ -10,6 +10,7 @@ from egresocovid19.static.municipality_codes import municipality_codes
 from egresocovid19.utils.run_sync import run_sync
 from fastapi.testclient import TestClient
 from mimesis import Address, Person
+from pydantic import EmailStr
 
 shared_dict: Dict[str, Any] = {}
 
@@ -17,7 +18,7 @@ shared_dict: Dict[str, Any] = {}
 async def mock_get_current_active_user() -> UserEntity:
     return UserEntity(
         name="Test client",
-        email="test@gmail.com",
+        email=EmailStr("test@gmail.com"),
         phone="+0000000000",
         hashed_password="hashed_password",
         email_confirmed=True,

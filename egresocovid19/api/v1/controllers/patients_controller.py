@@ -63,9 +63,9 @@ class PatientsController:
             for item in result
         ]
 
-    @router.get("/patients/{patientId}", responses={404: not_found_response})
-    async def get_patient(self, patientId: PydanticObjectId) -> PatientGetDetailSchema:
-        patient = await PatientEntity.get_or_404(patientId)
+    @router.get("/patients/{patient_id}", responses={404: not_found_response})
+    async def get_patient(self, patient_id: PydanticObjectId) -> PatientGetDetailSchema:
+        patient = await PatientEntity.get_or_404(patient_id)
         return await self._get_patient_detail_schema(patient)
 
     @router.post(
@@ -90,17 +90,19 @@ class PatientsController:
             ),
             personal_pathological_history=[
                 PathologicalEmbeddedEntity(
-                    pathological=pathologicals[p.name].id,
+                    pathological=cast(PydanticObjectId, pathologicals[p.name].id),
                     treatments=p.treatments,
                 )
                 for p in schema.personal_pathological_history
+                if p.name in pathologicals and pathologicals[p.name].id
             ],
             family_pathological_history=[
                 PathologicalEmbeddedEntity(
-                    pathological=pathologicals[p.name].id,
+                    pathological=cast(PydanticObjectId, pathologicals[p.name].id),
                     treatments=p.treatments,
                 )
                 for p in schema.family_pathological_history
+                if p.name in pathologicals and pathologicals[p.name].id
             ],
         )
         await patient.save()
@@ -110,7 +112,7 @@ class PatientsController:
         )
 
     @router.put(
-        "/patients/{patientId}",
+        "/patients/{patient_id}",
         responses={
             400: bad_request_response,
             404: not_found_response,
@@ -118,12 +120,12 @@ class PatientsController:
     )
     async def put_patient(
         self,
-        patientId: PydanticObjectId,
+        patient_id: PydanticObjectId,
         schema: PatientPutSchema,
     ) -> PatientGetDetailSchema:
-        actual_patient = await PatientEntity.get_or_404(patientId)
+        actual_patient = await PatientEntity.get_or_404(patient_id)
         old_patient = await PatientEntity.find_one(
-            And(Eq(PatientEntity.ci, schema.ci), NE(PatientEntity.id, patientId))
+            And(Eq(PatientEntity.ci, schema.ci), NE(PatientEntity.id, patient_id))
         )
         if old_patient:
             raise BadRequest("Already exists a patient with same CI")
@@ -154,18 +156,20 @@ class PatientsController:
             if schema.personal_pathological_history is not None:
                 actual_patient.personal_pathological_history = [
                     PathologicalEmbeddedEntity(
-                        pathological=pathologicals[p.name].id,
+                        pathological=cast(PydanticObjectId, pathologicals[p.name].id),
                         treatments=p.treatments,
                     )
                     for p in schema.personal_pathological_history
+                    if p.name in pathologicals and pathologicals[p.name].id
                 ]
             if schema.family_pathological_history is not None:
                 actual_patient.family_pathological_history = [
                     PathologicalEmbeddedEntity(
-                        pathological=pathologicals[p.name].id,
+                        pathological=cast(PydanticObjectId, pathologicals[p.name].id),
                         treatments=p.treatments,
                     )
                     for p in schema.family_pathological_history
+                    if p.name in pathologicals and pathologicals[p.name].id
                 ]
         updated_patient = actual_patient.copy(
             update=schema.dict(
@@ -183,7 +187,7 @@ class PatientsController:
         )
 
     @router.put(
-        "/patients/{patientId}/egreso",
+        "/patients/{patient_id}/egreso",
         responses={
             400: bad_request_response,
             404: not_found_response,
@@ -191,10 +195,10 @@ class PatientsController:
     )
     async def put_patient_egreso(
         self,
-        patientId: PydanticObjectId,
+        patient_id: PydanticObjectId,
         schema: DischargeOfPositiveCasesOfCovid19Schema,
     ) -> PatientGetDetailSchema:
-        actual_patient = await PatientEntity.get_or_404(patientId)
+        actual_patient = await PatientEntity.get_or_404(patient_id)
         if schema.symptoms is not None:
             symptoms = await self._get_symptoms_entities_from_schemas(schema.symptoms)
             actual_patient.discharge_of_positive_cases_of_covid_19.symptoms = [
