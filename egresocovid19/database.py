@@ -97,7 +97,7 @@ class PatientEntity(BaseEntity):
     personal_pathological_history: List[PathologicalEmbeddedEntity]
     # With autocompletation base on previous data and with default options
     family_pathological_history: List[PathologicalEmbeddedEntity]
-    discharge_of_positive_cases_of_covid_19: DischargeOfPositiveCasesOfCovid19EmbeddedEntity = Field(
+    discharge_of_positive_cases_of_covid_19: DischargeOfPositiveCasesOfCovid19EmbeddedEntity = Field(  # noqa: E501
         default_factory=lambda: DischargeOfPositiveCasesOfCovid19EmbeddedEntity
     )
 
