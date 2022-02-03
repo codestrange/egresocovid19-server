@@ -16,7 +16,7 @@ python = "^3.8"
 typer = "^0.4.0"
 fastapi = {extras = ["all"], version = "^0.73.0"}
 python-dotenv = "^0.19.2"
-fastapi-restful = {extras = ["all"], version = "^0.4.0"}
+fastapi-restful = {extras = ["all"], version = "^0.4.2"}
 python-jose = {extras = ["cryptography"], version = "^3.3.0"}
 passlib = {extras = ["bcrypt"], version = "^1.7.4"}
 python-multipart = "^0.0.5"
