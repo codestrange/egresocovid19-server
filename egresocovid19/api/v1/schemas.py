@@ -74,7 +74,7 @@ class PatientBaseSchema(APIModel):
     surgery: str
     popular_council: str
     neighborhood: str
-    block_number: int
+    block_number: Optional[int]
     personal_pathological_history: List[PathologicalSchema]
     family_pathological_history: List[PathologicalSchema]
 

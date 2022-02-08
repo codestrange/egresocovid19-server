@@ -92,7 +92,7 @@ class PatientEntity(BaseEntity):
     popular_council: str
     # With autocompletation base on previous data
     neighborhood: str
-    block_number: int
+    block_number: Optional[int]
     # With autocompletation base on previous data and with default options
     personal_pathological_history: List[PathologicalEmbeddedEntity]
     # With autocompletation base on previous data and with default options

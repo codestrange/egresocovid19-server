@@ -19,7 +19,8 @@ class AftermathEnum(IntEnum):
 
 
 class BloodTypeEnum(IntEnum):
-    Aplus = 0
+    Unknown = 0
+    Aplus = auto()
     Bplus = auto()
     ABplus = auto()
     Oplus = auto()
