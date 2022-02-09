@@ -76,6 +76,7 @@ class SexEnum(IntEnum):
 class SkinColorEnum(IntEnum):
     White = 0
     Black = auto()
+    HalfBlood = auto()
     Other = auto()
 
 
