@@ -29,33 +29,33 @@ class IncomeEmbeddedEntity(BaseModel):
 
 
 class DischargeOfPositiveCasesOfCovid19EmbeddedEntity(BaseModel):
-    detection_date: Optional[datetime]
+    detection_date: Optional[datetime] = None
     # With autocompletation base on previous data and with default options
     # SymptomEntity
     symptoms: List[PydanticObjectId] = []
-    duration_of_symptoms: Optional[int]
-    diagnosis_way: Optional[DiagnosisWayEnum]
-    test_used_in_diagnosis: Optional[TestDiagnosisEnum]
-    days_from_symptoms_to_diagnosis: Optional[int]
-    number_pcr_performed: Optional[int]
-    time_from_diagnosis_to_negative_or_discharge: Optional[int]
-    form_of_contagion: Optional[ContagionEnum]
-    was_he_part_of_an_event: Optional[bool]
-    did_he_work_in_the_attention_to_positive_cases: Optional[bool]
-    hospitalization_time: Optional[str]
+    duration_of_symptoms: Optional[int] = None
+    diagnosis_way: Optional[DiagnosisWayEnum] = None
+    test_used_in_diagnosis: Optional[TestDiagnosisEnum] = None
+    days_from_symptoms_to_diagnosis: Optional[int] = None
+    number_pcr_performed: Optional[int] = None
+    time_from_diagnosis_to_negative_or_discharge: Optional[int] = None
+    form_of_contagion: Optional[ContagionEnum] = None
+    was_he_part_of_an_event: Optional[bool] = None
+    did_he_work_in_the_attention_to_positive_cases: Optional[bool] = None
+    hospitalization_time: Optional[str] = None
     incomes: List[IncomeEmbeddedEntity] = []
-    contacts_first_level: Optional[int]
-    contacts_first_level_positives: Optional[int]
-    contacts_second_level: Optional[int]
-    contacts_second_level_positives: Optional[int]
-    contacts_third_level: Optional[int]
-    contacts_third_level_positives: Optional[int]
+    contacts_first_level: Optional[int] = None
+    contacts_first_level_positives: Optional[int] = None
+    contacts_second_level: Optional[int] = None
+    contacts_second_level_positives: Optional[int] = None
+    contacts_third_level: Optional[int] = None
+    contacts_third_level_positives: Optional[int] = None
     treatments_received: List[TreatmentEnum] = []
     # With autocompletation base on previous data
     antibiotics: List[str] = []
     prophylaxis: List[ProphylaxisEnum] = []
     # With autocompletation base on previous data
-    another_vaccine_against_covid: Optional[str]
+    another_vaccine_against_covid: Optional[str] = None
     aftermath: List[AftermathEnum] = []
     # With autocompletation base on previous data
     others_aftermath: List[str] = []
@@ -98,7 +98,7 @@ class PatientEntity(BaseEntity):
     # With autocompletation base on previous data and with default options
     family_pathological_history: List[PathologicalEmbeddedEntity]
     discharge_of_positive_cases_of_covid_19: DischargeOfPositiveCasesOfCovid19EmbeddedEntity = Field(  # noqa: E501
-        default_factory=lambda: DischargeOfPositiveCasesOfCovid19EmbeddedEntity
+        default_factory=DischargeOfPositiveCasesOfCovid19EmbeddedEntity
     )
 
     class Collection:
