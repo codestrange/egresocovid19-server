@@ -70,11 +70,11 @@ class PatientBaseSchema(APIModel):
     skin_color: SkinColorEnum
     blood_type: Optional[BloodTypeEnum]
     address: str
-    polyclinic: str
-    surgery: str
-    popular_council: str
-    neighborhood: str
-    block_number: int
+    polyclinic: Optional[str]
+    surgery: Optional[str]
+    popular_council: Optional[str]
+    neighborhood: Optional[str]
+    block_number: Optional[int]
     personal_pathological_history: List[PathologicalSchema]
     family_pathological_history: List[PathologicalSchema]
 

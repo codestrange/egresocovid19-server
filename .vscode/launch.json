@@ -13,7 +13,8 @@
                 "egresocovid19.main:app",
                 "--reload"
             ],
-            "jinja": true
+            "jinja": true,
+            "justMyCode": false
         }
     ]
 }

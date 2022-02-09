@@ -3,12 +3,13 @@ from egresocovid19.database import UserEntity
 from egresocovid19.main import api_v1, app
 from fastapi.testclient import TestClient
 from mimesis import Text
+from pydantic import EmailStr
 
 
 async def mock_get_current_active_user() -> UserEntity:
     return UserEntity(
         name="Test client",
-        email="test@gmail.com",
+        email=EmailStr("test@gmail.com"),
         phone="+0000000000",
         hashed_password="hashed_password",
         email_confirmed=True,

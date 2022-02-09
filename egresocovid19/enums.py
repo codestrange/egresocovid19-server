@@ -19,7 +19,8 @@ class AftermathEnum(IntEnum):
 
 
 class BloodTypeEnum(IntEnum):
-    Aplus = 0
+    Unknown = 0
+    Aplus = auto()
     Bplus = auto()
     ABplus = auto()
     Oplus = auto()
@@ -75,6 +76,7 @@ class SexEnum(IntEnum):
 class SkinColorEnum(IntEnum):
     White = 0
     Black = auto()
+    HalfBlood = auto()
     Other = auto()
 
 
