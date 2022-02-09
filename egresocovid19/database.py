@@ -85,13 +85,13 @@ class PatientEntity(BaseEntity):
     address: str
     municipality_code: str
     # With autocompletation base on previous data
-    polyclinic: str
+    polyclinic: Optional[str]
     # With autocompletation base on previous data
-    surgery: str
+    surgery: Optional[str]
     # With autocompletation base on previous data
-    popular_council: str
+    popular_council: Optional[str]
     # With autocompletation base on previous data
-    neighborhood: str
+    neighborhood: Optional[str]
     block_number: Optional[int]
     # With autocompletation base on previous data and with default options
     personal_pathological_history: List[PathologicalEmbeddedEntity]
