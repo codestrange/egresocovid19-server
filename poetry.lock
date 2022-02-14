@@ -254,7 +254,7 @@ test = ["pytest (>=6.2.4,<7.0.0)", "pytest-cov (>=2.12.0,<4.0.0)", "mypy (==0.91
 
 [[package]]
 name = "fastapi-restful"
-version = "0.4.2"
+version = "0.4.3"
 description = "Quicker FastApi developing tools"
 category = "main"
 optional = false
@@ -938,7 +938,7 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "ae3f27b627b86625e7f68f88614731b6c8728f2071be1799d41cfca23818b2ab"
+content-hash = "35058dfb3d4f60c326daa0a787c624d1c23a48a721822b88eb57bdd15b55a1d9"
 
 [metadata.files]
 anyio = [
@@ -1148,8 +1148,8 @@ fastapi = [
     {file = "fastapi-0.73.0.tar.gz", hash = "sha256:dcfee92a7f9a72b5d4b7ca364bd2b009f8fc10d95ed5769be20e94f39f7e5a15"},
 ]
 fastapi-restful = [
-    {file = "FastApi-RESTful-0.4.2.tar.gz", hash = "sha256:60eff35b05d2f4db15c81ef16d362a753dc26c3bdb7a5c5a949290692fddc7b9"},
-    {file = "FastApi_RESTful-0.4.2-py3-none-any.whl", hash = "sha256:908d1d301f234434fe65a841648d52e3af70d88dd2f2f5cec1585ce4056618df"},
+    {file = "FastApi-RESTful-0.4.3.tar.gz", hash = "sha256:6953813d489d1d3220e85cc2421df609358b9523aa76f28359f8668ea4aa7a61"},
+    {file = "FastApi_RESTful-0.4.3-py3-none-any.whl", hash = "sha256:42e8906c729d435db53fe5ed51546996d51011bd3efbfb27cce115a8091bd747"},
 ]
 flake8 = [
     {file = "flake8-4.0.1-py2.py3-none-any.whl", hash = "sha256:479b1304f72536a55948cb40a32dce8bb0ffe3501e26eaf292c7e60eb5e0428d"},
