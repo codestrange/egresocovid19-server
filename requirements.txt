@@ -46,6 +46,6 @@ ujson==4.2.0; python_full_version >= "3.6.2" and python_version >= "3.6" and pyt
 urllib3==1.26.7; python_full_version >= "3.6.1" and python_version < "4"
 uvicorn==0.15.0; python_full_version >= "3.6.2" and python_full_version < "4.0.0"
 uvloop==0.16.0
-watchgod==0.7
+watchgod==0.8.2
 websockets==10.0
 yarl==1.7.0; python_version >= "3.7" and python_version < "4.0"
