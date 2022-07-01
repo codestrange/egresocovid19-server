@@ -3,7 +3,7 @@ asgiref==3.5.2; python_full_version >= "3.6.1" and python_version >= "3.6"
 bcrypt==3.2.2; python_version >= "3.6"
 beanie==1.8.12; python_version >= "3.7" and python_version < "4.0"
 certifi==2022.6.15; python_full_version >= "3.6.1"
-cffi==1.15.0
+cffi==1.15.1
 charset-normalizer==2.1.0; python_full_version >= "3.6.1" and python_version >= "3"
 click==8.0.3; python_version >= "3.7" and python_version < "4.0" and python_full_version >= "3.6.1"
 colorama==0.4.5
