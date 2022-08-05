@@ -269,7 +269,7 @@ session = ["sqlalchemy (>=1,<2)"]
 
 [[package]]
 name = "flake8"
-version = "5.0.3"
+version = "5.0.4"
 description = "the modular source code checker: pep8 pyflakes and co"
 category = "dev"
 optional = false
@@ -939,7 +939,7 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "12f01b109aee64591f1352ba1120ba0ee20daf3052cbefd5743a71b23f3cbd58"
+content-hash = "acabab3240d9a34c248c46c1da76197b3fe1aaf63dccc39d86ac5c66ca1387df"
 
 [metadata.files]
 anyio = [
@@ -1170,8 +1170,8 @@ fastapi-restful = [
     {file = "FastApi_RESTful-0.4.3-py3-none-any.whl", hash = "sha256:42e8906c729d435db53fe5ed51546996d51011bd3efbfb27cce115a8091bd747"},
 ]
 flake8 = [
-    {file = "flake8-5.0.3-py2.py3-none-any.whl", hash = "sha256:93aa565ae2f0316b95bb57a354f2b2d55ee8508e1fe1cb13b77b9c195b4a2537"},
-    {file = "flake8-5.0.3.tar.gz", hash = "sha256:b27fd7faa8d90aaae763664a489012292990388e5d3604f383b290caefbbc922"},
+    {file = "flake8-5.0.4-py2.py3-none-any.whl", hash = "sha256:7a1cf6b73744f5806ab95e526f6f0d8c01c66d7bbe349562d22dfca20610b248"},
+    {file = "flake8-5.0.4.tar.gz", hash = "sha256:6fbe320aad8d6b95cec8b8e47bc933004678dc63095be98528b7bdd2a9f510db"},
 ]
 future-fstrings = [
     {file = "future_fstrings-1.2.0-py2.py3-none-any.whl", hash = "sha256:90e49598b553d8746c4dc7d9442e0359d038c3039d802c91c0a55505da318c63"},
