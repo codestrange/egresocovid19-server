@@ -17,7 +17,7 @@ jobs:
       with:
         poetry-version: 1.1.2
     - name: Start MongoDB
-      uses: supercharge/mongodb-github-action@1.6.0
+      uses: supercharge/mongodb-github-action@1.8.0
       with:
         mongodb-version: 4.4
     - name: Run tests
