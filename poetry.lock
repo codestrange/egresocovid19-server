@@ -380,7 +380,7 @@ python-versions = ">=3.6"
 
 [[package]]
 name = "mimesis"
-version = "6.0.0"
+version = "6.1.1"
 description = "Mimesis: Fake Data Generator."
 category = "dev"
 optional = false
@@ -927,7 +927,7 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "a62218b502ca8888d9594eac465c10135f31beb0e3e76cd42b9eadd0eb13b1f8"
+content-hash = "d0f63183471220ac700cae61d1108ca7174e33899e2e03497748240bed5ffbe7"
 
 [metadata.files]
 anyio = [
@@ -1346,8 +1346,8 @@ mccabe = [
     {file = "mccabe-0.7.0.tar.gz", hash = "sha256:348e0240c33b60bbdf4e523192ef919f28cb2c3d7d5c7794f74009290f236325"},
 ]
 mimesis = [
-    {file = "mimesis-6.0.0-py3-none-any.whl", hash = "sha256:688242469a4c5af89579ccdc39d7b90fb5a99096858e48efb9a366a9f088cc20"},
-    {file = "mimesis-6.0.0.tar.gz", hash = "sha256:be32f0efb16c4dcd1c46f434886f200631605203498a3b42bc7846f4acc28425"},
+    {file = "mimesis-6.1.1-py3-none-any.whl", hash = "sha256:eabe41d7afa23b01dffb51ebd9e10837df6417fef02fa9841989ca886e479790"},
+    {file = "mimesis-6.1.1.tar.gz", hash = "sha256:044ac378c61db0e06832ff722548fd6e604881d36bc938002e0bd5b85eeb6a98"},
 ]
 motor = [
     {file = "motor-2.5.1-py3-none-any.whl", hash = "sha256:961fdceacaae2c7236c939166f66415be81be8bbb762da528386738de3a0f509"},
