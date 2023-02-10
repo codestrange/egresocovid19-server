@@ -14,7 +14,7 @@ egresocovid19 = "egresocovid19.cli:app"
 [tool.poetry.dependencies]
 python = "^3.8"
 typer = "^0.7.0"
-fastapi = {extras = ["all"], version = "^0.90.0"}
+fastapi = {extras = ["all"], version = "^0.90.1"}
 python-dotenv = "^0.21.1"
 fastapi-restful = {extras = ["all"], version = "^0.4.3"}
 python-jose = {extras = ["cryptography"], version = "^3.3.0"}
