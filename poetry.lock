@@ -866,14 +866,14 @@ files = [
 
 [[package]]
 name = "mimesis"
-version = "8.0.0"
+version = "9.0.0"
 description = "Mimesis: Fake Data Generator."
 category = "dev"
 optional = false
 python-versions = ">=3.8,<4.0"
 files = [
-    {file = "mimesis-8.0.0-py3-none-any.whl", hash = "sha256:49720e4b78135b67ce174a508539b3940cbac876cbece953f5a5fa21bcc21697"},
-    {file = "mimesis-8.0.0.tar.gz", hash = "sha256:8cafea7987534af9fc2efd97841b5f855441632f9ae9400607dbeb5b8ffe9382"},
+    {file = "mimesis-9.0.0-py3-none-any.whl", hash = "sha256:8437b2350cadb360e4bf4eb226ad5eee5071abe5f38b44d0d9e77ea76192dda1"},
+    {file = "mimesis-9.0.0.tar.gz", hash = "sha256:8d9dff939c13c6ae4922c5df4cdee5fbb4c34bdd521001ca40c1ab43d43cbb0e"},
 ]
 
 [package.dependencies]
@@ -1922,4 +1922,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.8"
-content-hash = "6f944754ce88387b0e61870c753ddc722f65053d20da91076222161c4f05f4e6"
+content-hash = "0dfd1b7961cc366cb76063a87f6a75d3387004007c3d2797c6693e75a4442eed"
