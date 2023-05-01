@@ -29,7 +29,7 @@ black = "^23.3"
 isort = "^5.12.0"
 pytest-cov = "^4.0.0"
 pytest-asyncio = "^0.21.0"
-mimesis = "^8.0.0"
+mimesis = "^9.0.0"
 pytest-depends = "^1.0.1"
 
 [build-system]
