@@ -866,19 +866,15 @@ files = [
 
 [[package]]
 name = "mimesis"
-version = "9.0.0"
+version = "10.0.0"
 description = "Mimesis: Fake Data Generator."
 category = "dev"
 optional = false
 python-versions = ">=3.8,<4.0"
 files = [
-    {file = "mimesis-9.0.0-py3-none-any.whl", hash = "sha256:8437b2350cadb360e4bf4eb226ad5eee5071abe5f38b44d0d9e77ea76192dda1"},
-    {file = "mimesis-9.0.0.tar.gz", hash = "sha256:8d9dff939c13c6ae4922c5df4cdee5fbb4c34bdd521001ca40c1ab43d43cbb0e"},
+    {file = "mimesis-10.0.0-py3-none-any.whl", hash = "sha256:7d6dbb4d70641e0f591d17f28580fb42da2b7a9e0e9e1cc019f2585e6317b7e4"},
+    {file = "mimesis-10.0.0.tar.gz", hash = "sha256:fc8c00d8a10f709e5bf6bba17f388c871742af70c0c2c1e69b067361d9f7a147"},
 ]
-
-[package.dependencies]
-coverage = ">=7.2.3,<8.0.0"
-pytest-cov = ">=4.0.0,<5.0.0"
 
 [[package]]
 name = "motor"
@@ -1923,4 +1919,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.8"
-content-hash = "acd289d7554fef01bdb057f684a24ee482abd3348de95180a6693c9988ae15b7"
+content-hash = "f206ef9e8f1e6e606d197fbef10cb7617875eb37c0822284e1ba326b0346e657"
