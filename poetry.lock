@@ -73,14 +73,14 @@ typecheck = ["mypy"]
 
 [[package]]
 name = "beanie"
-version = "1.19.1"
+version = "1.19.2"
 description = "Asynchronous Python ODM for MongoDB"
 category = "main"
 optional = false
 python-versions = ">=3.7,<4.0"
 files = [
-    {file = "beanie-1.19.1-py3-none-any.whl", hash = "sha256:98499e5875e25211b14e78be18a7af9ebf1533d630d27f29d9e6fd3b3dcdc92d"},
-    {file = "beanie-1.19.1.tar.gz", hash = "sha256:82de69b7375f169839f21dd6ffd6760af4c7004e34f0648fa86a657a99ec9dd9"},
+    {file = "beanie-1.19.2-py3-none-any.whl", hash = "sha256:fba803e954eff3f036db2236c1e02fe7afffe4330db2108d405ac820076e3ae1"},
+    {file = "beanie-1.19.2.tar.gz", hash = "sha256:1894c984a9f129bce03e19a9cb52ad47002bb3b4ea1a6b7af3a8a65978a35b78"},
 ]
 
 [package.dependencies]
@@ -1919,4 +1919,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.8"
-content-hash = "68d71e3c8cf1b9d5728b7dd43370f8c36642077c1a40b9706ddb9fd5685d9e7b"
+content-hash = "ad201e1178f6d61438ce2ebef2a25bfac5174be96918bc397ebe7772f0f355b6"
