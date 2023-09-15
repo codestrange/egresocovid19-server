@@ -70,13 +70,13 @@ typecheck = ["mypy"]
 
 [[package]]
 name = "beanie"
-version = "1.22.1"
+version = "1.22.5"
 description = "Asynchronous Python ODM for MongoDB"
 optional = false
 python-versions = ">=3.7,<4.0"
 files = [
-    {file = "beanie-1.22.1-py3-none-any.whl", hash = "sha256:ac400ad59dca8b76086e90c3fb17e21fb0a066d0826f4bd318be82263eb41541"},
-    {file = "beanie-1.22.1.tar.gz", hash = "sha256:cc462d175b47e4b652841e623b74582dc1e1fda3bebf0b5499ae582ea14a04dd"},
+    {file = "beanie-1.22.5-py3-none-any.whl", hash = "sha256:61332cb326dc89177e27a8e1bfca646f2dcff3fcf9ebea8b0159e8ca88901780"},
+    {file = "beanie-1.22.5.tar.gz", hash = "sha256:e7ddc6c7d7fec3462d29a85df3a30965a42515e1cb823104476b315aaec54bd6"},
 ]
 
 [package.dependencies]
@@ -85,7 +85,7 @@ lazy-model = "0.2.0"
 motor = ">=2.5.0,<4.0.0"
 pydantic = ">=1.10,<3.0"
 toml = "*"
-typing-extensions = ">=4.7"
+typing-extensions = {version = ">=4.7", markers = "python_version < \"3.11\""}
 
 [package.extras]
 doc = ["Markdown (>=3.3)", "Pygments (>=2.8.0)", "jinja2 (>=3.0.3)", "mkdocs (>=1.4)", "mkdocs-material (>=9.0)", "pydoc-markdown (>=4.8)"]
@@ -1848,4 +1848,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.8"
-content-hash = "d907658b497107d09a5f11201c747f19c885a56684c4a09646e20a8b223e77cb"
+content-hash = "c8e5aad5963b7f62848af59193970e8f1e906fe5a9629fec4c1bdb8ee8c1d81a"
