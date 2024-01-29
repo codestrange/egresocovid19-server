@@ -25,7 +25,7 @@ beanie = "^1.25.0"
 [tool.poetry.dev-dependencies]
 pytest = "^7.4.4"
 flake8 = "^5.0.4"
-black = "^23.12"
+black = "^24.1"
 isort = "^5.13.2"
 pytest-cov = "^4.1.0"
 pytest-asyncio = "^0.23.3"
