@@ -23,7 +23,7 @@ python-multipart = "^0.0.9"
 beanie = "^1.26.0"
 
 [tool.poetry.dev-dependencies]
-pytest = "^8.2.0"
+pytest = "^8.2.1"
 flake8 = "^5.0.4"
 black = "^24.4"
 isort = "^5.13.2"
