@@ -17,7 +17,7 @@ typer = "^0.15.1"
 fastapi = {extras = ["all"], version = "^0.99.1"}
 python-dotenv = "^1.0.1"
 fastapi-restful = {extras = ["all"], version = "^0.4.5"}
-python-jose = {extras = ["cryptography"], version = "^3.3.0"}
+python-jose = {extras = ["cryptography"], version = "^3.4.0"}
 passlib = {extras = ["bcrypt"], version = "^1.7.4"}
 python-multipart = "^0.0.20"
 beanie = "^1.29.0"
