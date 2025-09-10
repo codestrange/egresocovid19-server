@@ -26,7 +26,7 @@ orjson==3.11.3; python_full_version >= "3.6.2" and python_version >= "3.7" and p
 passlib==1.7.4
 psutil==5.8.0; python_full_version >= "3.6.2" and python_full_version < "4.0.0"
 pyasn1==0.6.1; python_version >= "3.5" and python_version < "4"
-pycparser==2.22
+pycparser==2.23
 pydantic==2.11.7; python_full_version >= "3.6.2" and python_full_version < "4.0.0" and python_version >= "3.7" and python_version < "4.0"
 pymongo==4.14.1; python_version >= "3.7" and python_version < "4.0" and python_full_version >= "3.5.2"
 python-dotenv==1.0.1; python_version >= "3.5"
