@@ -1,5 +1,5 @@
 anyio==4.11.0; python_version >= "3.6" and python_full_version >= "3.6.2"
-asgiref==3.9.2; python_full_version >= "3.6.1" and python_version >= "3.6"
+asgiref==3.10.0; python_full_version >= "3.6.1" and python_version >= "3.6"
 bcrypt==5.0.0; python_version >= "3.6"
 beanie==1.29.0; python_version >= "3.7" and python_version < "4.0"
 certifi==2025.8.3; python_full_version >= "3.6.1"
