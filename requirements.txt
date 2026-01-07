@@ -43,7 +43,7 @@ toml==0.10.2; python_version >= "3.7" and python_full_version < "3.0.0" and pyth
 typer==0.20.1; python_version >= "3.6"
 typing-extensions==4.15.0; python_full_version >= "3.6.2" and python_full_version < "4.0.0" and python_version >= "3.7" and python_version < "4.0"
 ujson==5.11.0; python_full_version >= "3.6.2" and python_version >= "3.6" and python_full_version < "4.0.0"
-urllib3==2.6.2; python_full_version >= "3.6.1" and python_version < "4"
+urllib3==2.6.3; python_full_version >= "3.6.1" and python_version < "4"
 uvicorn==0.15.0; python_full_version >= "3.6.2" and python_full_version < "4.0.0"
 uvloop==0.22.1
 watchgod==0.8.2
