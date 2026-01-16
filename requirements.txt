@@ -25,7 +25,7 @@ multidict==6.7.0; python_version >= "3.7" and python_version < "4.0"
 orjson==3.11.5; python_full_version >= "3.6.2" and python_version >= "3.7" and python_full_version < "4.0.0"
 passlib==1.7.4
 psutil==5.8.0; python_full_version >= "3.6.2" and python_full_version < "4.0.0"
-pyasn1==0.6.1; python_version >= "3.5" and python_version < "4"
+pyasn1==0.6.2; python_version >= "3.5" and python_version < "4"
 pycparser==2.23
 pydantic==2.12.5; python_full_version >= "3.6.2" and python_full_version < "4.0.0" and python_version >= "3.7" and python_version < "4.0"
 pymongo==4.16.0; python_version >= "3.7" and python_version < "4.0" and python_full_version >= "3.5.2"
