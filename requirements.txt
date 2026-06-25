@@ -1,4 +1,4 @@
-anyio==4.12.1; python_version >= "3.6" and python_full_version >= "3.6.2"
+anyio==4.14.1; python_version >= "3.6" and python_full_version >= "3.6.2"
 asgiref==3.11.1; python_full_version >= "3.6.1" and python_version >= "3.6"
 bcrypt==5.0.0; python_version >= "3.6"
 beanie==1.29.0; python_version >= "3.7" and python_version < "4.0"
